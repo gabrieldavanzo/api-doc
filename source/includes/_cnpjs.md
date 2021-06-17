@@ -1,4 +1,4 @@
-# Consulta de Empresa por CNPJ (beta)
+# Consulta de CNPJ
 
 O Cadastro Nacional de Pessoa Jurídica - CNPJ - compreende as informações cadastrais das entidades de interesse das administrações tributárias da União, dos estados, do Distrito Federal e dos municípios. Ao cadastro da pessoa jurídica é atribuído a um ou mais números de inscrição no CNPJ. Este número de inscrição é formado por (14) dígitos e composto de três partes e representado usando a seguinte notação:
 
@@ -53,7 +53,7 @@ public class ExemploConsultaHook {
 
         String login = "Token_obtido_no_cadastro_da_empresa";
 
-        String server = "https://api.focusnfe.com.br/"; 
+        String server = "https://api.focusnfe.com.br/";
 
         String url = server.concat("/v2/cnpjs/07504505000132");
 
@@ -170,7 +170,7 @@ Para realizar uma consulta cadastro de uma empresa, utilize o endereço abaixo s
 
 `https://api.focusnfe.com.br/v2/cnpjs/INSCRICAO_CNPJ`
 
-Utilize o método HTTP **GET**. 
+Utilize o método HTTP **GET**.
 
 A pesquisa só poderá ser feita usando o número completo de inscrição no CNPJ, com seus 14 dígitos completos. Não é suportado nesse momento uma busca aproximada através de um número de identificação de CNPJ parcial e só é possível executar a consulta ao cadastro de um número de CNPJ por requisição.
 
@@ -215,4 +215,3 @@ Para cada consulta à API de CNPJs a resposta trará um objeto JSON, com os camp
   * **bairro**: Bairro.
   * **cep**: CEP.
   * **uf**: UF.
-
