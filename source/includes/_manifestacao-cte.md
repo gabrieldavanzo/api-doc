@@ -1,5 +1,5 @@
 
-# Manifestação - CTe (beta)
+# Manifestação - CTe
 
 Da mesma forma que a manifestação de NFe, a API para manifestação de CTe do sistema Focus permite que você consulte todos os conhecimentos de transporte recebidos pela sua empresa e permite que você realize a manifestação frente a receita. No caso da CTe, é necessário realizar a manifestação apenas se houver algum desacordo com a CTe emitida. A API faz ainda a guarda de todos os documentos recebidos para que você consulte quando precisar e recupera todas as MDFes associadas a CTe.
 
