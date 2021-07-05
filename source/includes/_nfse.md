@@ -60,35 +60,25 @@ Os campos denotados com (*) são obrigatórios.
 }
 ```
 
-- **data_emissao**(*): (Data) Data/hora de emissão da NFSe. Alguns municípios como São Paulo não utilizam hora e ela será descartada caso seja fornecida. Formato padrão ISO, exemplo: “2016-12-25T12:00-0300”.
-- **natureza_operacao**(*): (String) Natureza da operação. Informar um dos códigos abaixo. Valor padrão: 1. Campo ignorado para o município de São Paulo.
+- **data_emissao**(*): (Data) Data/hora de emissão da NFSe. Alguns municípios não utilizam hora e ela será descartada caso seja fornecida. Formato padrão ISO, exemplo: “2016-12-25T12:00-0300”.
+- **natureza_operacao**(*): (String) Natureza da operação. Informar um dos códigos abaixo. Valor padrão: 1. Campo ignorado em alguns municípios.
   - **1**: Tributação no município;
   - **2**: Tributação fora do município;
   - **3**: Isenção;
   - **4**: Imune;
   - **5**: Exigibilidade suspensa por decisão judicial;
   - **6**: Exigibilidade suspensa por procedimento administrativo.
-- **regime_especial_tributacao**: (String) Informar o código de identificação do regime especial de tributação conforme abaixo. Campo ignorado para o município de São Paulo.
+- **regime_especial_tributacao**: (String) Informar o código de identificação do regime especial de tributação conforme abaixo. Campo ignorado em alguns municípios.
   - **1**: Microempresa municipal;
   - **2**: Estimativa;
   - **3**: Sociedade de profissionais;
   - **4**: Cooperativa;
   - **5**: MEI - Simples Nacional;
   - **6**: ME EPP- Simples Nacional.
-* **optante_simples_nacional**(*): (Boolean) Informar verdadeiro ou falso se a empresa for optante pelo Simples Nacional. Campo ignorado pelo município de São Paulo.
-* **incentivador_cultural**: (Boolean) Informe verdadeiro ou falso. Valor padrão: falso. Campo ignorado para o município de São Paulo.
-- **tributacao_rps**: (String) Usado apenas pelo município de São Paulo. Informe o tipo de tributação:
-  - **T**: Tributado em São Paulo;
-  - **F**: Tributado Fora de São Paulo;
-  - **A**: Tributado em São Paulo, porém Isento;
-  - **B**: Tributado Fora de São Paulo, porém Isento;
-  - **M**: Tributado em São Paulo, porém Imune;
-  - **N**: Tributado Fora de São Paulo, porém Imune;
-  - **X**: Tributado em São Paulo, porém Exigibilidade Suspensa;
-  - **V**: Tributado Fora de São Paulo, porém Exigibilidade Suspensa;
-  - **P**: Exportação de Serviços.
+* **optante_simples_nacional**(*): (Boolean) Informar verdadeiro ou falso se a empresa for optante pelo Simples Nacional. Campo ignorado por alguns municípios
+* **incentivador_cultural**: (Boolean) Informe verdadeiro ou falso. Valor padrão: falso. Campo ignorado em alguns municípios.
 * **codigo_obra**: (String) Código da obra quando construção civil. Tamanho: 15 caracteres.
-* **art**: (String) Código ART quando construção civil. Este campo é ignorado pelo município de São Paulo. Tamanho: 15 caracteres.
+* **art**: (String) Código ART quando construção civil. Este campo é ignorado em alguns municípios.
 * **numero_rps_substituido**: (String) Caso o município permita a substituição de notas, aqui você poderá
 informar o número do RPS que será substituído. Municípios que seguem o padrão ABRASF poderão usar esta operação.
 * **serie_rps_substituido**: (String) Obrigatório se informado o campo numero_rps_substituido. Indica a série do RPS a ser substituído.
@@ -108,11 +98,11 @@ informar o número do RPS que será substituído. Municípios que seguem o padr�
   - **cnpj**(*): (String) CNPJ do tomador, se aplicável. Caracteres não numéricos são ignorados.
   - **inscricao_municipal**: (String) Inscrição municipal do tomador. Caracteres não numéricos são ignorados.
   - **razao_social**: (String) Razão social ou nome do tomador. Tamanho: 115 caracteres.
-  - **telefone**: (String) Telefone do tomador. Campo ignorado para o município de São Paulo. Tamanho: 11 caracteres.
+  - **telefone**: (String) Telefone do tomador. Tamanho: 11 caracteres.
   - **email**: (String) Email do tomador. Tamanho: 80 caracteres.
   - **endereco**:
   	  - **logradouro**: (String) Nome do logradouro. Tamanho: 125 caracteres.
-  	  - **tipo_logradouro**: (String) Tipo do logradouro. Usado apenas para o município de São Paulo. Valor padrão: os 3 primeiros caracteres do logradouro. Tamanho: 3 caracteres.
+  	  - **tipo_logradouro**: (String) Tipo do logradouro. Usado apenas para alguns municípios. Valor padrão: os 3 primeiros caracteres do logradouro. Tamanho: 3 caracteres.
   	  - **numero**: (String) Número do endereço. Tamanho: 10 caracteres.
   	  - **complemento**: (String) Complemento do endereço. Tamanho: 60 caracteres.
   	  - **bairro**: Bairro. (String) Tamanho: 60 caracteres.
@@ -131,23 +121,23 @@ informar o número do RPS que será substituído. Municípios que seguem o padr�
 	- **valor_ir**: (Decimal) Valor do IRRF.
 	- **valor_csll**: (Decimal) Valor do CSLL
 	- **iss_retido**(*): (Boolean) Informar verdadeiro ou falso se o ISS foi retido.
-	- **valor_iss**: (Decimal) Valor do ISS. Campo ignorado pelo município de São Paulo.
-	- **valor_iss_retido**: (Decimal) Valor do ISS Retido. Campo ignorado pelo município de São Paulo.
-	- **outras_retencoes**: (Decimal) Valor de outras retenções. Campo ignorado pelo município de São Paulo.
-	- **base_calculo**: (Decimal) Base de cálculo do ISS, valor padrão igual ao valor_servicos. Campo ignorado pelo município de São Paulo.
+	- **valor_iss**: (Decimal) Valor do ISS. Campo ignorado por alguns municípios que realizam seu próprio cálculo.
+	- **valor_iss_retido**: (Decimal) Valor do ISS Retido. Campo ignorado em alguns municípios.
+	- **outras_retencoes**: (Decimal) Valor de outras retenções. Campo ignorado em alguns municípios.
+	- **base_calculo**: (Decimal) Base de cálculo do ISS, valor padrão igual ao valor_servicos. Campo ignorado em alguns municípios.
 	- **aliquota**: (Decimal) Aliquota do ISS. Algumas cidades permitem usar 4 dígitos decimais.
-	- **desconto_incondicionado**: (Decimal) Valor do desconto incondicionado. Campo ignorado pelo município de São Paulo.
-	- **desconto_condicionado**: (Decimal) Valor do desconto condicionado. Campo ignorado pelo município de São Paulo.
-	- **item_lista_servico**(*): (String) Informar o código da lista de serviços, de acordo com a Lei Complementar 116/2003. Utilize outra tabela para o município de São Paulo.
-	- **codigo_cnae**: (String) Informar o código CNAE de 7 dígitos. Campo ignorado pelo município de São Paulo.
-	- **codigo_tributario_municipio**: (String) Informar o código tributário de acordo com a tabela de cada município (não há um padrão). Campo ignorado pelo município de São Paulo.
+	- **desconto_incondicionado**: (Decimal) Valor do desconto incondicionado. Campo ignorado em alguns municípios.
+	- **desconto_condicionado**: (Decimal) Valor do desconto condicionado. Campo ignorado em alguns municípios.
+	- **item_lista_servico**(*): (String) Informar o código da lista de serviços, normalmente de acordo com a Lei Complementar 116/2003.
+	- **codigo_cnae**: (String) Informar o código CNAE de 7 dígitos. Campo ignorado em alguns municípios.
+	- **codigo_tributario_municipio**: (String) Informar o código tributário de acordo com a tabela de cada município (não há um padrão).
 	- **discriminacao**(*): (String) Discriminação dos serviços. Tamanho: 2000 caracteres.
 	- **codigo_municipio**(*): (String) Informar o código IBGE de 7 dígitos do município de prestação do serviço.
-	- **percentual_total_tributos**: (Decimal) Percentual aproximado de todos os impostos, de acordo com a Lei da Transparência. No momento disponível apenas para São Paulo.
-	- **fonte_total_tributos**: (String) Fonte de onde foi retirada a informação de total de impostos, por exemplo, “IBPT”. No momento disponível apenas para São Paulo.
+	- **percentual_total_tributos**: (Decimal) Percentual aproximado de todos os impostos, de acordo com a Lei da Transparência. No momento disponível apenas alguns municípios.
+	- **fonte_total_tributos**: (String) Fonte de onde foi retirada a informação de total de impostos, por exemplo, “IBPT”. No momento disponível apenas para alguns municípios.
 
 ### Intermediário
-- **intermediario** (esta seção é ignorada pelo município de São Paulo)
+- **intermediario** (esta seção é ignorada se não suportada pelo município)
 	- **razao_social**: (String) Razão social do intermediário do serviço. Tamanho: 115 caracteres.
 	- **cpf**: (String) CPF do intermediário do serviço, se aplicável. Caracteres não numéricos são ignorados.
 	- **cnpj**: (String) CNPJ do intermediário do serviço, se aplicável. Caracteres não numéricos são ignorados.
