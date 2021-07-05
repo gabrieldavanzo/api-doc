@@ -978,16 +978,18 @@ completa = 0 ou 1 | Habilita a API há mostrar campos adicionais na requisição
 
 ```json
 {
-"status":"autorizado",
-"status_sefaz":"100",
-"mensagem_sefaz":"Autorizado o uso da NF-e",
-"cnpj_emitente":"SEU_CNPJ",
-"ref":"REFERENCIA",
-"chave_nfe":"NFe41170777627353999172550010000003871980884091",
-"numero":"387",
-"serie":"1",
-"caminho_xml_nota_fiscal":"/arquivos/733530172/201704/XMLs/41170777627353999172550010000003871980884091-nfe.xml",
-"caminho_danfe":"/arquivos/733530172/201704/DANFEs/41170777627353999172550010000003871980884091.pdf"
+  "cnpj_emitente": "07504505000132",
+  "ref": "07504505000132_NFCE_000001",
+  "status": "autorizado",
+  "status_sefaz": "100",
+  "mensagem_sefaz": "Autorizado o uso da NF-e",
+  "chave_nfe": "NFe42210607504505000132650010000000541799075218",
+  "numero": "524",
+  "serie": "1",
+  "caminho_xml_nota_fiscal": "/arquivos_development/07504505000132/202106/XMLs/42210607504505000132650010000000541799075218-nfe.xml",
+  "caminho_danfe": "/notas_fiscais_consumidor/NFe42210607504505000132650010000000541799075218.html",
+  "qrcode_url": "https://hom.sat.sef.sc.gov.br/nfce/consulta?p=42210607504505000132650010000000541799075218|2|2|1|EB75B2FF9C11198DF1093E9582AB7F1A9B08D518",
+  "url_consulta_nf": "https://hom.sat.sef.sc.gov.br/nfce/consulta"
 }
 ```
 
@@ -1006,7 +1008,7 @@ Campos de retorno:
 * **ref:** A referência da emissão.
 * **chave_nfe:** A chave da NFe, caso ela tenha sido autorizada.
 * **caminho_xml_nota_fiscal:** caso a nota tenha sido autorizada, retorna o caminho para download do XML.
-* **caminho_danfe:** caso a nota tenha sido autorizada retorna o caminho para download do DANFe.
+* **caminho_danfe:** caso a nota tenha sido autorizada retorna o caminho para download do DANFCe. O formato devolvido será '.html'.
 * **caminho_xml_cancelamento:** Caso a nota esteja cancelada, é fornecido o caminho para fazer o download do XML de cancelamento.
 * **contingencia_offline** Este campo irá aparecer apenas quando a nota tiver sido emitida em contingência offline.
 * **contingencia_offline_efetivada** Quando a nota tiver sido emitida em contingência offline, este campo irá mostrar se a nota já foi efetivada (transmitida para a SEFAZ) ou não.
