@@ -232,7 +232,7 @@ Utilize o método HTTP **GET**. São aceitos os seguintes parâmetros de pesquis
 Caso já saiba o código CFOP exato, e queira apenas recuperar sua descrição, utilize o link
 abaixo, substituindo CODIGO_CFOP pelo código.
 
-`https://homologacao.focusnfe.com.br/v2/cfops?CODIGO_CFOP`
+`https://homologacao.focusnfe.com.br/v2/cfops/CODIGO_CFOP`
 
 
 ## Paginação
