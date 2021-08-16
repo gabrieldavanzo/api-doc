@@ -1,28 +1,28 @@
-# Comunicador Focus NFe
-Para os usuários de tecnologias que não permitem o acesso à API via Web Services ou que não desejam programar o acesso HTTP, disponibilizamos um comunicador standalone (desktop) que realiza toda comunicação com a nossa API.
+# Comunicador Focus NFe v2
+
+O Comunicador Focus NFe consiste em uma aplicação desktop que permite a emissão de NFCe e CFe (SAT e MFe) de maneira simplificada, voltada especialmente para usuários de tecnologias que não permitem o acesso à API via Web Services ou que não desejam programar o acesso HTTP, podendo assim utilizar um sistema de processamento de diretórios para emissão de documentos fiscais. Ainda, a aplicação também disponibiliza uma API local para usuários que prefiram uma comunicação direta entre sistemas.
 
 ## Visão Geral
 
-O Enviador de Arquivos, quando é executado, consulta o conteúdo de algumas pastas com descrições especificas que podem ser criados a partir do diretório escolhido pelo usuário, chamamos estes diretórios de 'Diretórios de Comunicação'.
-Desta forma, seu programa poderá apenas criar um arquivo em uma pasta específica, contendo o JSON com os dados necessários para emitir a nota.
-O enviador por sua vez consulta esta pasta e armazena o resultado (PDF, XML) em outra pasta para consulta.
+O Comunicador Focus NFe, quando executado, consulta o conteúdo de diretórios com descrições especificas que podem ser criados a partir de um caminho válido configurado pelo usuário. Chamamos esses diretórios de 'Diretórios de Comunicação'.
+Desta forma, basta um software terceiro  criar um arquivo em um diretório específico, contendo o JSON com os dados necessários, para emitir a nota.
+O Comunicador Focus NFe por sua vez consulta este diretório, processa o conteúdo e retorna o resultado nos demais 'Diretórios de Comunicação' descritos na sequência. O mesmo  ocorre caso seja optada a comunicação via API Local, desconsideramos do processo apenas a leitura de um arquivo no diretório de input.
 
 <aside class="warning">
-O diretório de comunicação deve ser um local onde o usuário terá plenos direitos de acesso dentro do sistema operacional. Recomendamos o diretório: C:\\Comunicador\
+Os 'Diretórios de comunicação' são criados a partir de um caminho válido configurado pelo usuário. O mesmo deve ser um local onde o usuário terá plenos direitos de acesso dentro do sistema operacional. Recomendamos o diretório: `C:\\Comunicador\´  - (Sendo responsabilidade do usuário a criação desse diretório)
 </aside>
 
-**Diretórios de Comunicação**
+Abaixo a descrição de cada 'Diretório de Comunicação' e a sua finalidade:
 
-Abaixo a descrição de cada pasta e a sua finalidade:
+* **envios**: Diretório inicial do processo de envio (input). O Comunicador Focus NFe irá procurar os arquivos com extensão .nfce ou .cfe para fazer a emissão e .canc e .cfecanc para cancelamento.
+* **enviados**: Todos os arquivos lidos no diretório 'envios' serão movidos para este diretório após o processamento.
+* **tmp**: Neste diretório é gerado um arquivo no formato XML para o envio dos dados ao aparelho S@T. Na emissão de NFCe essa etapa não acontece, pois é utilizada a nossa API de NFCe.
+* **retornos**: Neste diretório é gerado um novo arquivo com a resposta da Sefaz formatada, porém com a extensão .cfe/.cfecanc, .nfce/.canc. Consiste no resultado do processamento interno do Comunicador.
+* **xml**: Neste diretório é salvo o XML gerado pela Sefaz, tanto para CFe S@T como para NFCe (emissão e cancelamento).
+* **danfe**: neste diretório é salvo a DANFE em formato .html. Não é gerado impressão quando o documento fiscal é cancelado.
+* **pdf**: neste diretório é salvo a DANFE e a impressão do CFe do S@T (Quando a opção de impressão direta é habilitada na tela de configurações). Não é gerado impressão quando o documento fiscal é cancelado.
 
-* **envios**: diretório inicial do processo de envio. O Enviador irá procurar os arquivos com extensão .nfce ou .cfe para fazer a emissão ou cancelamento.
-* **enviados**: todos os arquivos lidos no diretório 'envios' serão movidos para este diretório.
-* **tmp**: neste diretório é gerado um arquivo no formato XML para o envio dos dados ao aparelho S@T. Na emissão de NFCe essa etapa não acontece, pois é utilizada a nossa API de NFCe.
-* **processados**: neste diretório o Enviador de Arquivos irá armazenar as respostas 'cruas' recebidas da Sefaz, ele irá adicionar a extensão '.resp.raw.json' nos arquivos .cfe/.cfecanc, .nfce/.canc.
-* **retornos**: aqui é gerado um novo arquivo com a resposta da Sefaz formatada (mesmo conteúdo presente no arquivo do diretório 'processados'), porém com a extensão .cfe/.cfecanc, .nfce/.canc.
-* **xml**: neste diretório é salvo o XML gerado pela Sefaz, tanto para CFe S@T como para NFCe (emissão e cancelamento).
-* **pdf**: aqui é salvo a DANFCe e a impressão do CFe do S@T. Não é gerado impressão quando o documento fiscal é cancelado.
-* **html**: aqui é salvo a DANFCe em formato .html. Não é gerado impressão quando o documento fiscal é cancelado.
+Observação: A geração do PDF foi removida do fluxo de autorização de cupons. Isso significa que o mesmo só é gerado caso a opção de impressão direta esteja ativada na tela de configurações. Ainda, na tela de histórico de documentos fiscais, é possível obter individualmente o PDF e o XML dos documentos autorizados. Além disso, o PDF também pode ser obtido via requisição direta na API Local. 
 
 <aside class="warning">
 O diretório que contém os logs do Comunicador Focus NFe é sempre fixo em: <br>
@@ -32,12 +32,12 @@ C:\Users\{{usuáŕio}}\AppData\Roaming\comunicador-focus-nfe. Onde {{usuário}} 
 
 No diagrama abaixo mostramos como será o fluxo de acesso aos diretórios citados anteriormente:
 
-<%= image_tag "diagrama_enviador_electron.png" %>
+<%= image_tag "diagrama_enviador_electron_2.png" %>
 
 
 ## Documentos Suportados
 
-Os documentos fiscais suportados atualmente são o Cupom Fiscal Eletrônico gerado por aparelhos S@T do Estado de São Paulo e a Nota Fiscal de Consumidor Eletrônica ou NFCe que pode ser emitida em todos os Estados brasileiros, com exceção de Santa Catarina.
+Os documentos fiscais suportados atualmente são o Cupom Fiscal Eletrônico gerado por aparelhos S@T do Estado de São Paulo e pelo MFe do Estado do Ceará e a Nota Fiscal de Consumidor Eletrônica ou NFCe que pode ser emitida em todos os Estados brasileiros, com exceção de Santa Catarina.
 
 Para cada documento, será esperado um arquivo com formato diferente. Nele, estarão os dados da nota que serão enviados para a Sefaz do Estado.
 
@@ -47,14 +47,16 @@ De forma geral, as fabricantes costumam utilizar a mesma versão da DLL para tod
 
 Marcar | Modelo
 -------|---------
-Tanca | TM-1000
-Epson | SAT A10
 Bematech | RB 2000
+Bematech | SAT GO
 Control ID | SAT iD
 Dimep | D-SAT 2.0
-Elgin | Linker e Smart
+Epson | SAT A10
+Tanca | MFE TM-1000
+Tanca | SAT TS-1000
+Gertec| GerMFE
 Sweda | SS2000
-Urano | SAT UR
+Elgin | Linker e Smart
 
 Entre em contato com o nosso time de Suporte para verificar a possibilidade de integrações de novos fabricantes/modelos.
 
@@ -63,7 +65,7 @@ Entre em contato com o nosso time de Suporte para verificar a possibilidade de i
 
 Para emissão dos cupons fiscais com o S@T será necessário, primeiramente, o cumprimento das premissas abaixo:
 
-- Ter um aparelho S@T de uma marca homologada com o nosso sistema (consultar aqui).
+- Ter um aparelho S@T de uma marca homologada com o nosso sistema (consultar nosso suporte).
 - O S@T deve estar vinculado ao emitente na Sefaz do Estado de São Paulo.
 - O aparelho deve ser atividado, conforme as orientações do fabricante.
 - Configurado a Assinatura AC no aparelho S@T, através do seu respectivo software de ativação.
@@ -133,6 +135,7 @@ O arquivo com os dados do CFe S@T deve seguir a estrutura de um arquivo do forma
     ]
 }
 ```
+
 Abaixo os campos mínimos que utilizamos para a emissão de um Cupom Fiscal Eletrônicos S@T:
 
 Campos do grupo '**itens**':
@@ -165,6 +168,10 @@ Estes campos são preenchidos automaticamente quando omitidos:
 
 Campo | Descrição | Valor padrão
 ----- | --------- | -------------
+valor_desconto | valor do Desconto sobre item | 0.00
+valor_outras_despesas | valor Total de outras Despesas acessórias sobre Item | 0.00
+cest | código CEST que identifica a mercadoria sujeita aos regimes de substituição tributária e de antecipação do recolhimento do imposto | Campo omitido
+informacoes_adicionais_item | norma referenciada, informações complementares, etc. | Campo omitido
 icms_aliquota | alíquota do ICMS. | 0.00
 pis_situacao_tributaria | código da situação tributário do PIS. Valores possíveis: 01, 02, 03, 04, 05, 06, 07, 08 e 09. | 07 / 49
 pis_aliquota_porcentual | alíquota do PIS. | 0.00
@@ -224,8 +231,6 @@ TRIVALE | Unicard Banco Múltiplo S/A - TRICARD
 TRICARD | Unicard Banco Múltiplo S/A - TRICARD
 OUTROS | Outros
 
-
-
 **Emissão**
 
 > Arquivo **.cfe** de exemplo:
@@ -254,29 +259,13 @@ O Enviador de Arquivos utiliza a descrição do arquivo no formato '.cfe' para r
 
 **Cancelamento**
 
-> Arquivo **.cfecanc** de exemplo:
+Utilizamos a mesma referência de emissão para o cancelamento, contudo, sua extensão é alterada para **.cfecanc** e, seu conteúdo será desconsiderado. A referência será utilizada para uma busca no banco de dados, cancelando a nota a qual se refere.
 
-```json
-{
-    "chave": "77781082373077987991599000999380000289999993"
-}
-```
-> Arquivo **.cfecanc** de exemplo (quando informado o CNPJ ou CPF do destinatário):
+Após processado o cancelamento um arquivo com o nome formado por 'referencia + _canc_ + timestamp' será gravado no diretório "retornos" contendo um JSON simples com o resultado da operação indicando se houve sucesso ou erro.
 
-```json
-{
-    "chave": "77781082373077987991599000999380000289999993",
-    "cnpj": "07504505000132"
-}
-```
+**Geração do Cupom Fiscal Eletrônico e XML **
 
-Utilizamos a mesma referência de emissão para o cancelamento, contudo, sua extensão é alterada para **.cfecanc** e, em seu conteúdo, deve ser enviado a chave de acesso do Cupom Fiscal Eletrônico. Caso seja informado o documento de identificação do destinatário (CNPJ ou CPF) na emissão, o mesmo terá de ser informado no arquivo de cancelamento.
-
-Após processado o cancelamento um arquivo com o mesmo nome será gravado no diretório "retornos" contendo um JSON simples com o resultado da operação indicando se houve sucesso ou erro.
-
-**Reimpressão do Cupom Fiscal Eletrônico**
-
-O arquivo de impressão do CFe S@T fica armazenado na pasta 'pdf', basta acessar esse diretório para realizar a reimpressão de Cupons Fiscais já emitidos.
+Na tela de histórico de documentos fiscais, é possível gerar o PDF e/ou XML dos documentos de maneira individual. Também é possível gerar esses documentos utilizando uma rota específica da API local disponibilizada pelo Comunicador Focus NFe.
 
 ## NFCe
 
@@ -289,7 +278,7 @@ Para emissão da Nota Fiscal de Consumidor Eletrônica será necessário, primei
 - Informar os códigos CSC e ID_TOKEN no cadastro do emitente.
 - Importar o Certificado Digital através do Painel da API ou solicitar ao nosso Suporte (suporte@acras.com.br).
 
-A partir disso, será possível utilizar o nosso Enviador. Ressaltamos que todas as etapas são importantes e, quando não cumpridas, impedem a emissão do documento fiscal.
+A partir disso, será possível utilizar o nosso Comunicador Focus NFe. Ressaltamos que todas as etapas são importantes e, quando não cumpridas, impedem a emissão do documento fiscal.
 
 O arquivo com os dados da NFCe deve seguir a estrutura de um arquivo do formato JSON, mas com a extensão **.nfce** (emissão) e **.canc** (cancelamento).
 
@@ -312,7 +301,7 @@ cep_emitente | CEP do emitente.
 uf_emitente | UF do Estado do emitente.
 
 <aside class="notice">
-Atualmente nosso Enviador não faz os cálculos dos impostos apróximados da Lei da Transparência, mas você pode informá-lo através do campo <b>valor_total_tributos</b> nos totais da nota.
+Atualmente nosso Comunicador Focus NFe não faz os cálculos dos impostos apróximados da Lei da Transparência, mas você pode informá-lo através do campo <b>valor_total_tributos</b> nos totais da nota.
 </aside>
 
 **Emissão**
@@ -363,15 +352,15 @@ Atualmente nosso Enviador não faz os cálculos dos impostos apróximados da Lei
 }
 ```
 
-O Enviador de Arquivos utiliza a descrição do arquivo no formato '.nfce' para realizar a emissão da Nota Fiscal de Consumidor. Essa descrição nós chamamos de referência ou REF, você pode ler mais sobre ela [aqui](#introducao_referencia).
+O Comunicador Focus NFe utiliza a descrição do arquivo no formato '.nfce' para realizar a emissão da Nota Fiscal de Consumidor. Essa descrição nós chamamos de referência ou REF, você pode ler mais sobre ela [aqui](#introducao_referencia).
 
-É importante observar que o Enviador de Arquivos não possui qualquer inteligência com relação à referência utilizada, por isso, seu sistema deve garantir a criação das REF's, de modo que nunca seja criado uma mesma referência para o mesmo emitente. Se isso acontecer, você receberá um retorno informando que a nota já foi autorizada.
+É importante observar que o Comunicador Focus NFe não aceita duplicidade de referências, por isso, seu sistema deve garantir a criação das REF's, de modo que nunca seja criado uma mesma referência para o mesmo emitente. Se isso acontecer, você receberá um retorno informando que a referência já foi utilizada.
 
 **Cancelamento**
 
 Utilizamos a mesma referência de emissão para o cancelamento, contudo, sua extensão é alterada para **.canc** e, em seu conteúdo, deve ser enviado a justificativa do cancelamento da nota contendo de 15 à 200 caracteres.
 
-Após processado o cancelamento um arquivo com o mesmo nome será gravado no diretório "retornos" contendo um JSON simples com o resultado da operação indicando se houve sucesso ou erro.
+Após processado o cancelamento um arquivo com nome formado por 'referencia + _canc_ + timestamp' será gravado no diretório "retornos" contendo um JSON simples com o resultado da operação indicando se houve sucesso ou erro.
 
 > Arquivo de cancelamento da NFCe **.canc**:
 
@@ -383,9 +372,7 @@ Após processado o cancelamento um arquivo com o mesmo nome será gravado no dir
 
 **Reimpressão da DANFCe**
 
-O arquivo de impressão da NFCe fica armazenado na pasta 'pdf', basta acessar esse diretório para realizar a reimpressão de uma nota já emitida.
-
-Outra forma de realizar este processo é criar um arquivo sem conteúdo com a mesma descrição (REF) usada na emissão da nota, com o acréscimo do sufixo "\_nfce", e com a extensão de arquivo **.reimp.**. Ele deverá ser colocado no diretório 'envios', com isso, o Enviador irá fazer uma chamada na impressora configurada enviando a DANFCe para impressão.
+A reimpressão pode ser feita gerando manualmente o PDF na tela de histórico de documentos fiscais, assim basta acessar o diretório onde o arquivo foi salvo e imprimir o documento. Também é possível gerar esses documentos utilizando uma rota específica da API local disponibilizada pelo Comunicador Focus NFe.
 
 ## CFe MFe
 
@@ -398,11 +385,11 @@ Para emissão do Cupom Fiscal Eletrônico no estado do Ceará será necessário,
 
 Após a vinculação do Comunicador Focus NFe com o CNPJ do Contribuinte, o funcionamento do processo, assim como os campos utilizados, segue os mesmos padrões descritos na seção CFe S@T.
 
-## API Local (beta)
+## API Local v2
 
 ```shell
 # Consultar status
-curl -XGET -T http://localhost:55555/fiscal/sat/status
+curl -XGET -T http://localhost:55555/v2/fiscal/sat/status
 ```
 
 > Exemplo de resposta da API local após consultar o **status** do equipamento:
@@ -410,66 +397,66 @@ curl -XGET -T http://localhost:55555/fiscal/sat/status
 ```json
 {
   "status": "autorizado",
-  "codigo_sat": "08000",
   "mensagem": "SAT em operação",
-  "mensagem_sefaz": "",
-  "numero_sessao": "768630",
-  "raw_response": [] # Resposta sem tratamento retornada pelo equipamento.
 }
 ```
 
 ```shell
 # Extrair logs
-curl -XGET -T http://localhost:55555/fiscal/sat/logs
+curl -XGET -T http://localhost:55555/v2/fiscal/sat/logs
 ```
 > Exemplo de resposta da API local após extrair os **logs** do equipamento:
 
 ```json
 {
   "status": "autorizado",
-  "codigo_sat": "15000",
-  "mensagem_sefaz": "",
+  "mensagem": "Transferência finalizada",
   "arquivo_log_base64": "...", # String em base64 contendo os logs retornados pelo equipamento
-  "raw_response": [] # Resposta sem tratamento retornada pelo equipamento.
 }
 ```
 
 ```shell
-curl -XPOST --header 'Content-Type: application/json' http://localhost:55555/fiscal/sat/ -T arquivo.json
+curl -XPOST  http://localhost:55555/v2/fiscal/sat?ref=REFERENCIA -T arquivo.json
 ```
 > Exemplo de resposta da API local após **emissão** do cupom fiscal pelo equipamento SAT/MFe:
 
 ```json
 {
+  "ref": "REFERENCIA",
   "status": "autorizado",
   "mensagem": "Emitido com sucesso + conteudo notas.",
   "cpf_cnpj_emitente": "",
-  "chave_cfe": "CFe77781082373077987991599000999380000289999993",
+  "chave_nfe": "CFe77781082373077987991599000999380000289999993",
   "numero": "123",
-  "arquivo_cfe_base64": "...", # String em base64 contento o xml do cupom fiscal retornado pelo equipamento.
-  "data_emissao": "20200824185237",
-  "valor_total_cfe": "10.99",
-  "arquivo_cfe_pdf_base64": "...", # String em base64 contento o pdf do cupom fiscal.
 }
 ```
 
 ```shell
-curl -XDELETE --header 'Content-Type: application/json' http://localhost:55555/fiscal/sat/ -T arquivo.json
+curl -XDELETE http://localhost:55555/v2/fiscal/sat/REFERENCIA
 ```
 > Exemplo de resposta da API local após **cancelamento** do cupom fiscal pelo equipamento SAT/MFe:
 
 ```json
 {
-  "status": "cancelado",
+  "ref": "REFERENCIA",
+  "status": "autorizado",
   "mensagem": "Cupom cancelado com sucesso + conteudo CF-E-SAT cancelado.",
   "cpf_cnpj_emitente": "",
-  "chave_cfe": "CFe77781082373077987991599000999380000289991234",
-  "numero": "001754",
-  "arquivo_cfe_base64": "...", # String em base64 contento o xml do cupom fiscal retornado pelo equipamento.
-  "data_emissao": "20200824185237",
-  "valor_total_cfe": "10.99",
-  "arquivo_cfe_pdf_base64": ""
+  "chave_nfe": "CFe77781082373077987991599000999380000289999993",
+  "numero": "123","
 }
+```
+
+> Exemplo de requisição para geração do espelho do cupom fiscal:
+
+```shell
+curl -XGET  http://localhost:55555/v2/fiscal/sat/cfe/CHAVE_NFE.pdf
+```
+
+> Exemplo de requisição para geração do XML do cupom fiscal:
+
+```shell
+curl -XGET  http://localhost:55555/v2/fiscal/sat/cfe/CHAVE_NFE.xml
 ```
 
 Além do sistema de comunicação via diretórios, o Comunicador Focus NFe também disponibiliza uma API local para comunicação direta.
@@ -479,18 +466,24 @@ Através da API Local é possível:
 - Extrair os logs do equipamento (SAT/MFe).
 - Emissão do cupom fiscal (SAT/MFe).
 - Cancalemento do cupom fiscal (SAT/MFe).
+- Geração espelho do cupom fiscal pdf (SAT/MFe).
 
 ### URLs
 
 Método | URL (recurso) | Ação
 -------|---------------|------
-GET|http://localhost:PORTA/fiscal/sat/status | Retorna o status do equipamento.
-GET|http://localhost:PORTA/fiscal/sat/logs  | Extrai os logs do equipamento.
-POST|http://localhost:PORTA/fiscal/sat/  | Emite um cupom fiscal eletrônico.
-DELETE|http://localhost:PORTA/fiscal/sat/  | Cancela um cupom fiscal eletrônico.
+GET|http://localhost:PORTA/v2/fiscal/sat/status | Retorna o status do equipamento SAT/MFe.
+GET|http://localhost:PORTA/v2/fiscal/sat/logs  | Extrai os logs do equipamento SAT/MFe.
+POST|http://localhost:PORTA/v2/fiscal/sat?ref=REFERENCIA  | Emite um cupom fiscal eletrônico.
+DELETE|http://localhost:PORTA/v2/fiscal/sat/REFERENCIA  | Cancela um cupom fiscal eletrônico.
+GET|http://localhost:PORTA/v2/fiscal/sat/cfe/CHAVE_NFE.pdf  | Gera o espelho do cupom fiscal em PDF.
+GET|http://localhost:PORTA/v2/fiscal/sat/cfe/CHAVE_NFE.xml  | Gera o espelho do cupom fiscal em XML.
+POST|http://localhost:PORTA/v2/fiscal/nfce?ref=REFERENCIA  | Emite uma NFCe.
+DELETE|http://localhost:PORTA/v2/fiscal/nfce/REFERENCIA  | Cancela uma NFCe.
+
 
 - Obs 1: A valor de 'PORTA' é definido nas configurações do Comunicador Focus NFe. Caso não seja atribuído um número válido, será escolhido um valor de porta aleatório válido.
-- Obs 2: O body das requisições para emissão do cupom fiscal e para o cancelamento segue exatamente o mesmo padrão utilizado nos arquivos '.cfe' e '.cfecanc' exemplificados anteriormente.
+- Obs 2: O body das requisições para emissão do cupom fiscal segue exatamente o mesmo padrão utilizado no arquivos '.cfe' exemplificado anteriormente.
 
 ### Consultar Status
 A consulta de status retorna o status do equipamento SAT/MFe conectado no computador do usuário. O modelo do equipamento e o código de ativação devem ser devidamente configurados no Comunicador Focus NFe para o correto funcionamento da consulta.
@@ -499,11 +492,24 @@ A consulta de status retorna o status do equipamento SAT/MFe conectado no comput
 A extração dos logs retorna os logs do equipamento SAT/MFe conectado no computador do usuário. Devido ao tamanho do arquivo, os dados são retornados em base64.
 
 ### Emitir cupom fiscal
-A emissão de um cupom retorna um json com os detalhes da autorização feita pelo equipamento SAT/MFe conectado no computador do usuário. Os arquivos xmls gerados, assim como o pdf são retornados em base64.
+A emissão de um cupom retorna um json com os detalhes da autorização feita pelo equipamento SAT/MFe conectado no computador do usuário.
 
 ### Cancelar cupom fiscal
-O cancelamento de um cupom retorna um json com os detalhes do cancelamento feito pelo equipamento SAT/MFe conectado no computador do usuário. Os arquivos xmls gerados são retornados em base64.
+O cancelamento de um cupom retorna um json com os detalhes do cancelamento feito pelo equipamento SAT/MFe conectado no computador do usuário. 
+
+### Gerar espelho PDF
+A geração do espelho é feita com base no XML retornado pelo equipamento S@T/MFe e retornado na requisição em formato PDF.
+
+### Gerar XML referente ao cupom autorizado
+A geração do XML é feita com base no XML retornado pelo equipamento S@T/MFe.
+
+### Emitir NFCe
+A emissão de uma NFCe retorna um json com os detalhes da autorização feita pela API da Focus NFe.
+
+### Cancelar cupom fiscal
+O cancelamento de um cupom retorna um json com os detalhes do cancelamento feita pela API da Focus NFe.
+
 
 ## Download
 
-Para te acesso ao instalador do Enviador de Arquivos, entre em contato com a nossa equipe no email comercial@acras.com.br.
+Para te acesso ao instalador do Comunicador Focus NFe e ao código de ativação, entre em contato com a nossa equipe no email comercial@acras.com.br
