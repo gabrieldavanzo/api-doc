@@ -1,6 +1,6 @@
-# Comunicador Focus NFe v2
+# Comunicador Focus NFe v2 (beta)
 
-O Comunicador Focus NFe consiste em uma aplicação desktop que permite a emissão de NFCe e CFe (SAT e MFe) de maneira simplificada, voltada especialmente para usuários de tecnologias que não permitem o acesso à API via Web Services ou que não desejam programar o acesso HTTP, podendo assim utilizar um sistema de processamento de diretórios para emissão de documentos fiscais. Ainda, a aplicação também disponibiliza uma API local para usuários que prefiram uma comunicação direta entre sistemas.
+O Comunicador Focus NFe consiste em uma aplicação desktop que permite a emissão de NFCe e CFe (SAT e MFe) de maneira simplificada, voltada especialmente para usuários de tecnologias que não permitem o acesso à API via Web Services ou que não desejam programar o acesso HTTP, podendo assim utilizar um sistema de processamento de diretórios para emissão de documentos fiscais. Ainda, a aplicação também disponibiliza uma API local para usuários que prefiram uma comunicação direta entre sistemas. As especificações descritas nessa seção são válidas para a build 3.0.0 e posteriores do executável.
 
 ## Visão Geral
 
@@ -37,7 +37,7 @@ No diagrama abaixo mostramos como será o fluxo de acesso aos diretórios citado
 
 ## Documentos Suportados
 
-Os documentos fiscais suportados atualmente são o Cupom Fiscal Eletrônico gerado por aparelhos S@T do Estado de São Paulo e pelo MFe do Estado do Ceará e a Nota Fiscal de Consumidor Eletrônica ou NFCe que pode ser emitida em todos os Estados brasileiros, com exceção de Santa Catarina.
+Os documentos fiscais suportados atualmente são o Cupom Fiscal Eletrônico gerado por aparelhos S@T do Estado de São Paulo e pelo MFe do Estado do Ceará e a Nota Fiscal de Consumidor Eletrônica ou NFCe que pode ser emitida em todos os Estados brasileiros.
 
 Para cada documento, será esperado um arquivo com formato diferente. Nele, estarão os dados da nota que serão enviados para a Sefaz do Estado.
 
@@ -70,7 +70,7 @@ Para emissão dos cupons fiscais com o S@T será necessário, primeiramente, o c
 - O aparelho deve ser atividado, conforme as orientações do fabricante.
 - Configurado a Assinatura AC no aparelho S@T, através do seu respectivo software de ativação.
 
-A partir disso, será possível utilizar o nosso Enviador. Ressaltamos que todas as etapas são importantes e, quando não cumpridas, impedem a emissão do documento fiscal.
+A partir disso, será possível utilizar o nosso Comunicador Focus NFe. Ressaltamos que todas as etapas são importantes e, quando não cumpridas, impedem a emissão do documento fiscal.
 
 O arquivo com os dados do CFe S@T deve seguir a estrutura de um arquivo do formato JSON, mas com a extensão **.cfe** (emissão) e **.cfecanc** (cancelamento).
 
@@ -253,9 +253,9 @@ OUTROS | Outros
 }
 ```
 
-O Enviador de Arquivos utiliza a descrição do arquivo no formato '.cfe' para realizar a emissão do cupom fiscal. Essa descrição nós chamamos de referência ou REF, você pode ler mais sobre ela [aqui](#introducao_referencia).
+O Comunicador Focus NFe utiliza a descrição do arquivo no formato '.cfe' para realizar a emissão do cupom fiscal. Essa descrição nós chamamos de referência ou REF, você pode ler mais sobre ela [aqui](#introducao_referencia).
 
-É importante observar que o Enviador de Arquivos não possui qualquer inteligência com relação à referência utilizada, por isso, seu sistema deve garantir a criação das REF's, de modo que nunca seja criado uma mesma referência para o mesmo emitente. Se isso acontecer, você receberá um retorno informando que a nota já foi autorizada.
+É importante observar que o Comunicador Focus NFe não possui qualquer inteligência com relação à referência utilizada, por isso, seu sistema deve garantir a criação das REF's, de modo que nunca seja criado uma mesma referência para o mesmo emitente. Se isso acontecer, você receberá um retorno informando que a nota já foi autorizada.
 
 **Cancelamento**
 
@@ -274,7 +274,7 @@ Para emissão da Nota Fiscal de Consumidor Eletrônica será necessário, primei
 - Possuir Certificado Digital modelo A1.
 - Habilitar a emissão de NFCe na Sefaz do Estado do emitente.
 - Gerar os códigos CSC e ID_TOKEN na Sefaz.
-- Realizar o cadastro da empresa emitente em nossa base ([site Focus NFe](https://focusnfe.com.br/cadastro/), [Painel da API](https://app.focusnfe.com.br/) ou [API de Revenda](#revenda_revenda)).
+- Realizar o cadastro da empresa emitente em nossa base ([Painel da API](https://app.focusnfe.com.br/) ou [API de Revenda](#revenda_revenda)).
 - Informar os códigos CSC e ID_TOKEN no cadastro do emitente.
 - Importar o Certificado Digital através do Painel da API ou solicitar ao nosso Suporte (suporte@acras.com.br).
 
