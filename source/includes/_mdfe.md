@@ -7,6 +7,7 @@ As seguintes operações estão disponíveis:
 
 * Emissão de MDF-e com geração da DAMDF-e
 * Inclusão de condutor
+* Inclusão de DFe
 * Cancelamento de MDF-e
 * Encerramento de MDF-e
 
@@ -15,7 +16,7 @@ Através da API MDF-e é possível:
 * Emitir MDF-e (Conhecimento de Transporte Eletrônico) utilizando dados simplificados. Este processo é **assíncrono**. Ou seja, após a emissão a nota será enfileirada para processamento.
 * Cancelar uma MDF-e
 * Consultar o status de MDF-e emitidas.
-* Emitir os eventos: inclusão de condutor e encerramento.
+* Emitir os eventos: inclusão de condutor, inclusão de DFe e encerramento.
 
 ## URLs
 
@@ -25,7 +26,8 @@ POST |	/v2/mdfe?ref=REFERENCIA	| Cria uma MDF-e e envia para processamento.
 GET	 | /v2/mdfe/REFERENCIA	| Consulta a MDF-e com a referência informada e o seu status de processamento
 DELETE |	/v2/mdfe/REFERENCIA	| Cancela uma MDF-e com a referência informada
 POST |	/v2/mdfe/REFERENCIA/inclusao_condutor	| Inclui um novo condutor.
-POST |	/v2/mdfe/REFERENCIA/encerramento	| Encerra uma MDF-e
+POST |	/v2/mdfe/REFERENCIA/inclusao_dfe	| Inclui um novo DFe.
+POST |	/v2/mdfe/REFERENCIA/encerrar	| Encerra uma MDF-e
 
 ## Campos de um MDF-e
 
@@ -191,6 +193,9 @@ Caso na requisição seja passado o parâmetro `completa=1` será adicionado mai
 * **condutores_incluidos**: Inclui uma lista de dados de condutores que foram incluídos posteriormente. Cada chave contém:
   * **requisicao**: Inclui os dados completos da requisição de inclusão de condutores
   * **protocolo**: Inclui os dados completos do protocolo devolvido pela SEFAZ.
+* **dfes_incluidos**: Inclui uma lista de dados de documentos fiscais que foram incluídos posteriormente. Cada chave contém:
+  * **requisicao**: Inclui os dados completos da requisição de inclusão de DFe's
+  * **protocolo**: Inclui os dados completos do protocolo devolvido pela SEFAZ.
 
 
 > Exemplo de resposta da consulta de MDF-e:
@@ -327,13 +332,67 @@ A API irá em seguida devolver os seguintes campos:
 * **mensagem_sefaz**: Mensagem descritiva da SEFAZ detalhando o status.
 * **caminho_xml**: Caso o condutor tenha sido incluído, será informado aqui o caminho para download do XML de inclusão.
 
+## Inclusão de DFe
+
+
+```shell
+curl -u "token obtido no cadastro da empresa:" \
+  -X POST -d '{
+    "protocolo": "110011000001101",
+    "codigo_municipio_carregamento": "5107875",
+    "documentos": [
+        {
+            "codigo_municipio_descarregamento": "5107875",
+            "chave_nfe": "51210810425282002508550010000186761100123456"
+        }
+    ]
+  }' \
+  https://homologacao.focusnfe.com.br/v2/mdfe/12345/inclusao_dfe
+```
+
+> Resposta da API para a requisição de cancelamento:
+
+```json
+{
+  "status_sefaz": "135",
+  "mensagem_sefaz": "Evento registrado e vinculado a MDF-e",
+  "status": "incluido",
+  "caminho_xml": "https://focusnfe.s3-sa-east-1.amazonaws.com/arquivos_development/14674451000119/201805/XMLs/329180000006929_v03.00-eventoMDF-e.xml"
+}
+```
+
+Para incluir um DFe adicional em uma MDF-e autorizada (com indicativo de carregamento posterior), basta fazer uma requisição à URL abaixo, alterando o ambiente de produção para homologação, caso esteja emitindo notas de teste.
+
+Incluir um DFe em uma MDF-e autorizada:
+
+`https://api.focusnfe.com.br/v2/mdfe/REFERENCIA/inclusao_dfe`
+
+Utilize o comando **HTTP POST** para incluir um DFe. Este método é síncrono, ou seja, a comunicação com a SEFAZ será feita imediatamente e devolvida a resposta na mesma requisição.
+
+Os parâmetros de inclusão deverão ser enviados da seguinte forma:
+
+* **protocolo**: Nº do Protocolo de Autorização do MDF-e (Obrigatório)
+* **codigo_municipio_carregamento**: Código do Município de Carregamento (Obrigatório)
+* **nome_municipio_carregamento**: Nome do Município de Carregamento
+* **documentos**: Grupo de informações dos documentos que serão inseridos no MDF-e (Obrigatório)
+ * **codigo_municipio_descarregamento**: Código do Município de Descarregamento (Obrigatório)
+ * **nome_municipio_descarregamento**: Nome do Município de Descarregamento
+ * **chave_nfe**: Chave da NF-e (Obrigatório)
+
+A API irá em seguida devolver os seguintes campos:
+
+* **status**: incluido, se o DFe foi incluído com sucesso, ou erro_inclusao, se houve algum erro ao incluir o DFe.
+* **status_sefaz**: O status da operação na SEFAZ.
+* **mensagem_sefaz**: Mensagem descritiva da SEFAZ detalhando o status.
+* **caminho_xml**: Caso o DFe tenha sido incluído, será informado aqui o caminho para download do XML de inclusão.
+
 ## Encerramento
 
 
 ```shell
 curl -u "token obtido no cadastro da empresa:" \
   -X POST -d '{"data":"2019-03-05","sigla_uf":"SP","nome_municipio":"São Paulo"}' \
-  https://homologacao.focusnfe.com.br/v2/mdfe/12345/encerramento
+  https://homologacao.focusnfe.com.br/v2/mdfe/12345/encerrar
 ```
 
 > Resposta da API para a requisição de encerramento:
