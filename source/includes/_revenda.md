@@ -105,6 +105,136 @@ curl -u "token obtido no cadastro da empresa:" \
 
 Uma empresa pode ser criada usando o seguinte endereço
 
+> Exemplos de respostas da API por **status** para a requisição de envio:
+
+> **sucesso**
+
+```json
+{
+  "id": 17625,
+  "nome": "Nome da empresa Ltda",
+  "nome_fantasia": "Nome Fantasia",
+  "inscricao_estadual": 1234,
+  "inscricao_municipal": 46532,
+  "bairro": "Vila Isabel",
+  "cargo_responsavel": null,
+  "cep": 80210000,
+  "cnpj": "88776429000116",
+  "cpf": null,
+  "codigo_municipio": "4106902",
+  "codigo_pais": "1058",
+  "codigo_uf": "41",
+  "complemento": "Loja 1",
+  "cpf_cnpj_contabilidade": null,
+  "cpf_responsavel": null,
+  "discrimina_impostos": true,
+  "email": "test@example.com",
+  "enviar_email_destinatario": true,
+  "habilita_nfce": false,
+  "habilita_nfe": true,
+  "habilita_nfse": false,
+  "logradouro": "Rua João da Silva",
+  "municipio": "Curitiba",
+  "nome_responsavel": null,
+  "numero": 153,
+  "pais": "Brasil",
+  "regime_tributario": 1,
+  "telefone": "4130333333",
+  "uf": "PR",
+  "csc_nfce_producao": null,
+  "id_token_nfce_producao": null,
+  "csc_nfce_homologacao": null,
+  "id_token_nfce_homologacao": null,
+  "proximo_numero_nfe_producao": 1,
+  "proximo_numero_nfe_homologacao": 1,
+  "serie_nfe_producao": "1",
+  "serie_nfe_homologacao": "1",
+  "proximo_numero_nfse_producao": null,
+  "proximo_numero_nfse_homologacao": null,
+  "serie_nfse_producao": null,
+  "serie_nfse_homologacao": null,
+  "proximo_numero_nfce_producao": null,
+  "proximo_numero_nfce_homologacao": null,
+  "serie_nfce_producao": null,
+  "serie_nfce_homologacao": null,
+  "certificado_valido_ate": null,
+  "certificado_valido_de": null,
+  "certificado_cnpj": null,
+  "data_ultima_emissao": null,
+  "caminho_logo": null
+}
+```
+
+> **access_denial**
+
+```
+HTTP Basic: Access denied.
+```
+
+> **erro_validacao** (certificado inválido)
+
+```json
+{
+  "codigo": "erro_validacao",
+  "mensagem": "Erro de validação",
+  "erros": [
+    {
+      "codigo": "erro_validacao",
+      "mensagem": "Arquivo certificado base64 Houve um erro ao instalar o certificado, verifique se a senha está correto e o arquivo está no formato PFX ou P12 codificado em base64",
+      "campo": "arquivo_certificado_base64"
+    }
+  ]
+}
+```
+
+> **erro_validacao** (senha do certificado inválida)
+
+```json
+{
+  "codigo": "erro_validacao",
+  "mensagem": "Erro de validação",
+  "erros": [
+    {
+      "codigo": "erro_validacao",
+      "mensagem": "Arquivo certificado base64 Certificado não pertence ao CNPJ informado",
+      "campo": "arquivo_certificado_base64"
+    }
+  ]
+}
+```
+
+> **erro_validacao** (certificado de outra empresa)
+
+```json
+{
+  "codigo": "erro_validacao",
+  "mensagem": "Erro de validação",
+  "erros": [
+    {
+      "codigo": "erro_validacao",
+      "mensagem": "Arquivo certificado base64 Certificado não pertence ao CNPJ informado",
+      "campo": "arquivo_certificado_base64"
+    }
+  ]
+}
+```
+
+> **erro_validacao** (certificado vencido)
+
+```json
+{
+  "codigo": "erro_validacao",
+  "mensagem": "Erro de validação",
+  "erros": [
+    {
+      "codigo": "erro_validacao",
+      "mensagem": "Arquivo certificado base64 Certificado com prazo de validade vencido",
+      "campo": "arquivo_certificado_base64"
+    }
+  ]
+}
+```
+
 `https://api.focusnfe.com.br/v2/empresas`
 
 Caso queira apenas testar a criação de uma empresa, utilize o endereço abaixo:
@@ -122,6 +252,81 @@ curl -u "token obtido no cadastro da empresa:" \
   https://api.focusnfe.com.br/v2/empresas/123
 ```
 
+> Exemplos de respostas da API por **status** para a requisição de envio:
+
+> **sucesso**
+
+```json
+{
+  "id": 17625,
+  "nome": "Nome da empresa Ltda",
+  "nome_fantasia": "Nome Fantasia",
+  "inscricao_estadual": 1234,
+  "inscricao_municipal": 46532,
+  "bairro": "Vila Isabel",
+  "cargo_responsavel": null,
+  "cep": 80210000,
+  "cnpj": "88776429000116",
+  "cpf": null,
+  "codigo_municipio": "4106902",
+  "codigo_pais": "1058",
+  "codigo_uf": "41",
+  "complemento": "Loja 1",
+  "cpf_cnpj_contabilidade": null,
+  "cpf_responsavel": null,
+  "discrimina_impostos": true,
+  "email": "test@example.com",
+  "enviar_email_destinatario": true,
+  "habilita_nfce": false,
+  "habilita_nfe": true,
+  "habilita_nfse": false,
+  "logradouro": "Rua João da Silva",
+  "municipio": "Curitiba",
+  "nome_responsavel": null,
+  "numero": 153,
+  "pais": "Brasil",
+  "regime_tributario": 1,
+  "telefone": "4130333333",
+  "uf": "PR",
+  "csc_nfce_producao": null,
+  "id_token_nfce_producao": null,
+  "csc_nfce_homologacao": null,
+  "id_token_nfce_homologacao": null,
+  "proximo_numero_nfe_producao": 1,
+  "proximo_numero_nfe_homologacao": 1,
+  "serie_nfe_producao": "1",
+  "serie_nfe_homologacao": "1",
+  "proximo_numero_nfse_producao": null,
+  "proximo_numero_nfse_homologacao": null,
+  "serie_nfse_producao": null,
+  "serie_nfse_homologacao": null,
+  "proximo_numero_nfce_producao": null,
+  "proximo_numero_nfce_homologacao": null,
+  "serie_nfce_producao": null,
+  "serie_nfce_homologacao": null,
+  "certificado_valido_ate": null,
+  "certificado_valido_de": null,
+  "certificado_cnpj": null,
+  "data_ultima_emissao": null,
+  "caminho_logo": null
+}
+```
+
+> **access_denial**
+
+```
+HTTP Basic: Access denied.
+```
+
+> **nao_encontrado**
+
+```
+{
+  "codigo": "nao_encontrado",
+  "mensagem": "Empresa não encontrada"
+}
+```
+
 Uma empresa pode ser visualizada usando o seguinte endereço
 
 `https://api.focusnfe.com.br/v2/empresas/ID`
@@ -134,6 +339,136 @@ Onde ID é o id da empresa fornecido no momento da criação. Utilize o comando 
 curl -X PUT -u "token obtido no cadastro da empresa:" \
   -T empresa.json
   https://api.focusnfe.com.br/v2/empresas/123
+```
+
+> Exemplos de respostas da API por **status** para a requisição de envio:
+
+> **sucesso**
+
+```json
+{
+  "id": 17625,
+  "nome": "Nome da empresa Ltda",
+  "nome_fantasia": "Nome Fantasia",
+  "inscricao_estadual": 1234,
+  "inscricao_municipal": 46532,
+  "bairro": "Vila Isabel",
+  "cargo_responsavel": null,
+  "cep": 80210000,
+  "cnpj": "88776429000116",
+  "cpf": null,
+  "codigo_municipio": "4106902",
+  "codigo_pais": "1058",
+  "codigo_uf": "41",
+  "complemento": "Loja 1",
+  "cpf_cnpj_contabilidade": null,
+  "cpf_responsavel": null,
+  "discrimina_impostos": true,
+  "email": "test@example.com",
+  "enviar_email_destinatario": true,
+  "habilita_nfce": false,
+  "habilita_nfe": true,
+  "habilita_nfse": false,
+  "logradouro": "Rua João da Silva",
+  "municipio": "Curitiba",
+  "nome_responsavel": null,
+  "numero": 153,
+  "pais": "Brasil",
+  "regime_tributario": 1,
+  "telefone": "4130333333",
+  "uf": "PR",
+  "csc_nfce_producao": null,
+  "id_token_nfce_producao": null,
+  "csc_nfce_homologacao": null,
+  "id_token_nfce_homologacao": null,
+  "proximo_numero_nfe_producao": 1,
+  "proximo_numero_nfe_homologacao": 1,
+  "serie_nfe_producao": "1",
+  "serie_nfe_homologacao": "1",
+  "proximo_numero_nfse_producao": null,
+  "proximo_numero_nfse_homologacao": null,
+  "serie_nfse_producao": null,
+  "serie_nfse_homologacao": null,
+  "proximo_numero_nfce_producao": null,
+  "proximo_numero_nfce_homologacao": null,
+  "serie_nfce_producao": null,
+  "serie_nfce_homologacao": null,
+  "certificado_valido_ate": null,
+  "certificado_valido_de": null,
+  "certificado_cnpj": null,
+  "data_ultima_emissao": null,
+  "caminho_logo": null
+}
+```
+
+> **access_denial**
+
+```
+HTTP Basic: Access denied.
+```
+
+> **erro_validacao** (certificado inválido)
+
+```json
+{
+  "codigo": "erro_validacao",
+  "mensagem": "Erro de validação",
+  "erros": [
+    {
+      "codigo": "erro_validacao",
+      "mensagem": "Arquivo certificado base64 Houve um erro ao instalar o certificado, verifique se a senha está correto e o arquivo está no formato PFX ou P12 codificado em base64",
+      "campo": "arquivo_certificado_base64"
+    }
+  ]
+}
+```
+
+> **erro_validacao** (senha do certificado inválida)
+
+```json
+{
+  "codigo": "erro_validacao",
+  "mensagem": "Erro de validação",
+  "erros": [
+    {
+      "codigo": "erro_validacao",
+      "mensagem": "Arquivo certificado base64 Certificado não pertence ao CNPJ informado",
+      "campo": "arquivo_certificado_base64"
+    }
+  ]
+}
+```
+
+> **erro_validacao** (certificado de outra empresa)
+
+```json
+{
+  "codigo": "erro_validacao",
+  "mensagem": "Erro de validação",
+  "erros": [
+    {
+      "codigo": "erro_validacao",
+      "mensagem": "Arquivo certificado base64 Certificado não pertence ao CNPJ informado",
+      "campo": "arquivo_certificado_base64"
+    }
+  ]
+}
+```
+
+> **erro_validacao** (certificado vencido)
+
+```json
+{
+  "codigo": "erro_validacao",
+  "mensagem": "Erro de validação",
+  "erros": [
+    {
+      "codigo": "erro_validacao",
+      "mensagem": "Arquivo certificado base64 Certificado com prazo de validade vencido",
+      "campo": "arquivo_certificado_base64"
+    }
+  ]
+}
 ```
 
 Uma empresa pode ser alterada usando o seguinte endereço.
@@ -155,11 +490,108 @@ curl -X DELETE -u "token obtido no cadastro da empresa:" \
   https://api.focusnfe.com.br/v2/empresas/123
 ```
 
+> Exemplos de respostas da API por **status** para a requisição de envio:
+
+> **sucesso**
+
+```json
+{
+  "id": 17625,
+  "nome": "Nome da empresa Ltda",
+  "nome_fantasia": "Nome Fantasia",
+  "inscricao_estadual": 1234,
+  "inscricao_municipal": 46532,
+  "bairro": "Vila Isabel",
+  "cargo_responsavel": null,
+  "cep": 80210000,
+  "cnpj": "88776429000116",
+  "cpf": null,
+  "codigo_municipio": "4106902",
+  "codigo_pais": "1058",
+  "codigo_uf": "41",
+  "complemento": "Loja 1",
+  "cpf_cnpj_contabilidade": null,
+  "cpf_responsavel": null,
+  "discrimina_impostos": true,
+  "email": "test@example.com",
+  "enviar_email_destinatario": true,
+  "habilita_nfce": false,
+  "habilita_nfe": true,
+  "habilita_nfse": false,
+  "logradouro": "Rua João da Silva",
+  "municipio": "Curitiba",
+  "nome_responsavel": null,
+  "numero": 153,
+  "pais": "Brasil",
+  "regime_tributario": 1,
+  "telefone": "4130333333",
+  "uf": "PR",
+  "csc_nfce_producao": null,
+  "id_token_nfce_producao": null,
+  "csc_nfce_homologacao": null,
+  "id_token_nfce_homologacao": null,
+  "proximo_numero_nfe_producao": 1,
+  "proximo_numero_nfe_homologacao": 1,
+  "serie_nfe_producao": "1",
+  "serie_nfe_homologacao": "1",
+  "proximo_numero_nfse_producao": null,
+  "proximo_numero_nfse_homologacao": null,
+  "serie_nfse_producao": null,
+  "serie_nfse_homologacao": null,
+  "proximo_numero_nfce_producao": null,
+  "proximo_numero_nfce_homologacao": null,
+  "serie_nfce_producao": null,
+  "serie_nfce_homologacao": null,
+  "certificado_valido_ate": null,
+  "certificado_valido_de": null,
+  "certificado_cnpj": null,
+  "data_ultima_emissao": null,
+  "caminho_logo": null
+}
+```
+
+> **nao_encontrado**
+
+```json
+{
+  "codigo": "nao_encontrado",
+  "mensagem": "Empresa não encontrada"
+}
+```
+
+> **nao_encontrado**
+
+```json
+{
+  "codigo": "permissao_negada",
+  "mensagem": "Empresa não encontrada como propriedade da revenda"
+}
+```
+
+> **parametros_invalidos**
+
+```json
+{
+  "erros": [
+    {
+      "codigo": "parametros_invalidos",
+      "mensagem": "Existe um problema no JSON recebido: 822: unexpected token at 'empresa_id=12079'"
+    }
+  ]
+}
+```
+
+> **access_denial**
+
+```
+HTTP Basic: Access denied.
+```
+
 Uma empresa pode ser cancelada usando o seguinte endereço
 
 `https://api.focusnfe.com.br/v2/empresas/ID`
 
-Onde ID é o id da empresa fornecido no momento da criação. Utilize o comando **HTTP DELETE**. O resultado será todos os dados da empresa excluída. Após esta operação você não terá mais acesso aos dados da empresa ou aos documentos emitidos. Esta operação não é reversível, mas você poderá cadastrar a empresa novamente no futuro se for necessário. 
+Onde ID é o id da empresa fornecido no momento da criação. Utilize o comando **HTTP DELETE**. O resultado será todos os dados da empresa excluída. Após esta operação você não terá mais acesso aos dados da empresa ou aos documentos emitidos. Esta operação não é reversível, mas você poderá cadastrar a empresa novamente no futuro se for necessário.
 
 ## Listagem de empresas
 
