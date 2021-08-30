@@ -284,6 +284,7 @@ console.log("Corpo: " + request.responseText);
   "id": "Vj5rmkBq",
   "url": "http://minha.url/nfe",
   "authorization": null,
+  "authorization_header": null,
   "event": "nfe",
   "cnpj": "51916585000125"
 }
@@ -302,6 +303,7 @@ Utilize o método HTTP POST para criar um novo gatilho. Esta requisição aceita
 *  **url** – URL que deverá ser chamada quando o gatilho for ativado
 *  **authorization** – (opcional) O valor que for informado neste campo será devolvido no acionamento do gatilho no cabeçalho "Authorization".
 Desta forma você poderá por exemplo informar um token secreto para garantir que apenas nossa API acione a sua URL.
+*  **authorization_header** – (opcional) Nome do cabeçalho HTTP para enviar o conteúdo do campo "authorization" quando este foi informado. Caso não seja informado um valor para o campo authorization_header, será usado o nome de cabeçalho default: "Authorization".
 
 A API irá devolver como resposta o gatilho criado. É possível ter mais de um gatilho por evento. Note que o gatilho pode ser por empresa ou um gatilho genérico para todas as emissões feitas usando o token informado.
 
@@ -312,6 +314,11 @@ A API irá devolver como resposta o gatilho criado. É possível ter mais de um 
 `Authorization: lFNVw8q5WMeR3U9FOVOABTp36zrkvtaa`
 
 Este cabeçalho poderá ser verificado do lado do seu sistema, rejeitando requisições que não incluam este cabeçalho. Outra forma de utilizar este campo é usando o método [Basic Auth](https://en.wikipedia.org/wiki/Basic_access_authentication). Este método consiste em usar uma string no formato "Basic YWxndW11c3VhcmlvOmFsZ3VtYXNlbmhh", onde a última string é o resultado da concatenação de "algumusuario:algumasenha", e depois aplicada a codificação em Base64. Usando este método, você poderá usar alguma biblioteca disponível na sua linguagem de proramação e simplesmente testar o recebimento do usuário "algumusuario" com a senha "algumasenha".
+
+Se você utiliza um outro esquema de autenticação, você pode especificar tanto os campos authorization quanto
+authorization_header. Por exemplo, se sua aplicação espera o campo "X-ApiKey" com o valor "IlzJYBLJBxQT1FUGNRxhFO1ASpNKfj8z" você deverá informar estes valores nos campos authorization_header e authorization, respectivamente. Desta forma, nossa API irá enviar o seguinte cabeçalho ao acionar o gatilho:
+
+`X-ApiKey: IlzJYBLJBxQT1FUGNRxhFO1ASpNKfj8z`
 
 
 ## Consulta
