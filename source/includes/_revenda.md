@@ -95,6 +95,19 @@ Abaixo são listados todos os campos de uma empresa.
 | senha\_certificado                                           | texto            | Sim         | Sim          | Sim\*        | Senha do certificado digital\.                                                                                                                                             |
 | arquivo\_logo\_base64                                        | texto em base 64 |             |              |              | Logomarca da empresa para ser usada na DANFE\. Nem todas as prefeituras aceitam o uso de logo\. Utilize uma imagem em formato PNG de no máximo 200×200 pixels              |
 
+## Status API
+
+Aqui você encontra um resumo dos status possíveis para a API de revenda.
+
+HTTP CODE/STATUS | Status API Focus | Descrição | Correção
+---|---|---|---|
+401 - unauthorized | <em branco> | <em branco> | Verifique o seu token de acesso
+404 - not found | nao_encontrado | Empresa não encontrada | O id ou cnpj da empresa não foi encontrado
+400 - bad request | parametros_invalidos | Existe um problema no JSON recebido | Verifique o formato do arquivo JSON
+422 - unprocessable entity | erro_validacao | Arquivo certificado base64 Houve um erro ao instalar o certificado, verifique se a senha está correto e o arquivo está no formato PFX ou P12 codificado em base64 | Verifique se o certificado foi enviado corretamente
+422 - unprocessable entity | erro_validacao | Arquivo certificado base64 Certificado não pertence ao CNPJ informado | O certificado enviado não bate com o CNPJ informado
+422 - unprocessable entity | erro_validacao | Arquivo certificado base64 Certificado com prazo de validade vencido | Certificado precisa ser renovado
+
 ## Criação de empresa
 
 ```shell
@@ -163,12 +176,6 @@ Uma empresa pode ser criada usando o seguinte endereço
   "data_ultima_emissao": null,
   "caminho_logo": null
 }
-```
-
-> **access_denial**
-
-```
-HTTP Basic: Access denied.
 ```
 
 > **erro_validacao** (certificado inválido)
@@ -312,12 +319,6 @@ curl -u "token obtido no cadastro da empresa:" \
 }
 ```
 
-> **access_denial**
-
-```
-HTTP Basic: Access denied.
-```
-
 > **nao_encontrado**
 
 ```
@@ -399,12 +400,6 @@ curl -X PUT -u "token obtido no cadastro da empresa:" \
   "data_ultima_emissao": null,
   "caminho_logo": null
 }
-```
-
-> **access_denial**
-
-```
-HTTP Basic: Access denied.
 ```
 
 > **erro_validacao** (certificado inválido)
@@ -559,7 +554,7 @@ curl -X DELETE -u "token obtido no cadastro da empresa:" \
 }
 ```
 
-> **nao_encontrado**
+> **permissao_negada** (empresa não pertencente ao domínio do cliente)
 
 ```json
 {
@@ -581,11 +576,6 @@ curl -X DELETE -u "token obtido no cadastro da empresa:" \
 }
 ```
 
-> **access_denial**
-
-```
-HTTP Basic: Access denied.
-```
 
 Uma empresa pode ser cancelada usando o seguinte endereço
 
