@@ -481,6 +481,7 @@ GET|http://localhost:PORTA/v2/fiscal/sat/cfe/CHAVE_NFE.xml  | Gera o XML do cupo
 GET|http://localhost:PORTA/v2/fiscal/sat/cfe/CHAVE_NFE-canc.xml  | Gera o XML do cupom fiscal cancelado.
 POST|http://localhost:PORTA/v2/fiscal/nfce?ref=REFERENCIA  | Emite uma NFCe.
 DELETE|http://localhost:PORTA/v2/fiscal/nfce/REFERENCIA  | Cancela uma NFCe.
+GET|http://localhost:PORTA/v2/fiscal/nfce/CHAVE_NFE  | Retorna os dados da NFCe.
 GET|http://localhost:PORTA/v2/fiscal/nfce/CHAVE_NFE.pdf  | Gera o espelho da NFCe em PDF.
 GET|http://localhost:PORTA/v2/fiscal/nfce/CHAVE_NFE.xml  | Gera o XML da NFCe.
 GET|http://localhost:PORTA/v2/fiscal/nfce/CHAVE_NFE-canc.xml  | Gera o XML da NFCe cancelada.
@@ -526,11 +527,13 @@ GET  | http://localhost:PORTA/v2/fiscal/nfce/pendentes                          
 
 ### Emissão de NFCe em contingência
 
-- O parâmetro 'TIPO' tem dois valores possíveis: 'sat' e 'offline'. 
-    - Caso seja informado 'sat', a emissão em contingência será feita utilizando o aparelho S@T (essa opção só funcionará nos estados em que esse aparelho é utilizado).
-    - Caso seja informado 'offline', será emitida uma NFCe provisória que irá ser enviada posteriormente para efetivação. 
-- Há a opção de informar o parâmetro 'forma_emissao=offline' na URL de emissão para 'forçar' a contingência, ou seja, irá emitir a NFCe em contingência independente se a emissão de forma normal é possível ou não. Caso esse parâmetro não se faça presente, a emissão em contingência ocorrerá apenas nas situações que a compelem.
-    - Exemplo de URL: http://localhost:PORTA/v2/fiscal/nfce?ref=REFERENCIA&tipo_contingencia=TIPO&forma_emissao=offline
+- O parâmetro **TIPO** tem dois valores possíveis: **sat** e **offline**. 
+    - Caso seja informado **sat**, a emissão em contingência será feita utilizando o aparelho S@T (essa opção só funcionará nos estados em que esse aparelho é utilizado).
+    - Caso seja informado **offline**, será emitida uma NFCe provisória que irá ser enviada posteriormente para efetivação. 
+- Há a opção de informar o parâmetro **forma_emissao=offline** na URL de emissão para 'forçar' a contingência, ou seja, irá emitir a NFCe em contingência independente se a emissão de forma normal é possível ou não. Caso esse parâmetro não se faça presente, a emissão em contingência ocorrerá apenas nas situações que a compelem.
+    
+    Exemplo de uso: 
+    ```http://localhost:PORTA/v2/fiscal/nfce?ref=REFERENCIA&tipo_contingencia=TIPO&forma_emissao=offline```
 
 ### Efetivação de NFCe emitida em contingência
 
