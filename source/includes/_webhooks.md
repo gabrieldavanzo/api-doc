@@ -453,6 +453,7 @@ console.log("Corpo: " + request.responseText);
   "id": "Vj5rmkBq",
   "url": "http://minha.url/nfe",
   "authorization": null,
+  "authorization_header": null,
   "event": "nfe",
   "cnpj": "51916585000125"
 }
@@ -606,6 +607,7 @@ console.log("Corpo: " + request.responseText);
   "id": "Vj5rmkBq",
   "url": "http://minha.url/nfe",
   "authorization": null,
+  "authorization_header": null,
   "event": "nfe",
   "cnpj": "51916585000125",
   "deleted": true
@@ -633,6 +635,7 @@ Para isso é disponibilizado um endereço para cada tipo de documento que aceita
     "id": "Vj5rmkBq",
     "url": "http://minha.url/nfe",
     "authorization": null,
+    "authorization_header": null,
     "event": "nfe",
     "cnpj": "51916585000125",
   }
