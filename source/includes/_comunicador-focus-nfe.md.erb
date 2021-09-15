@@ -516,16 +516,27 @@ O cancelamento de uma NFCe retorna um json com os detalhes do cancelamento feita
 ### Contingência NFCe (beta)
 A Contingência NFCe é utilizada quando o estabelicimento não é capaz de se comunicar com a Sefaz. Isso pode ocorrer em situações de falta de conexão com a internet, indisponibilidade do Gateway ou indisponibilidade da Sefaz.  
 
-#### URLs
+### URLs
 
 Método | URL (recurso) | Ação
 -------|---------------|------
-POST | http://localhost:PORTA/v2/fiscal/nfce?ref=REFERENCIA&tipo_contingencia=VALOR&forma_emissao=offline | Emite uma NFCe offline (Contingência).
+POST | http://localhost:PORTA/v2/fiscal/nfce?ref=REFERENCIA&tipo_contingencia=TIPO                       | Emite uma NFCe offline (Contingência).
+PUT  | http://localhost:PORTA/v2/fiscal/nfce/REFERENCIA/efetivar                                         | Tenta efetivar uma NFCe emitida em contingência.
+GET  | http://localhost:PORTA/v2/fiscal/nfce/pendentes                                                   | Lista todas as NFCes emitidas em contingência que não foram efetivadas.
 
-- Obs 1: Onde 'VALOR' pode ser atribuído os valores 'sat' ou 'offline'
-- Obs 2: Quando informado 'forma_emissao', a contingência será feita de maneira forçada.
-- Obs 3: O Comunicador Offline Focus NFe tentará efetivar as notas emitidas em contingência a cada 30 minutos.
+### Emissão de NFCe em contingência
 
+- O parâmetro 'TIPO' tem dois valores possíveis: 'sat' e 'offline'. 
+    - Caso seja informado 'sat', a emissão em contingência será feita utilizando o aparelho S@T (essa opção só funcionará nos estados em que esse aparelho é utilizado).
+    - Caso seja informado 'offline', será emitida uma NFCe provisória que irá ser enviada posteriormente para efetivação. 
+- Há a opção de informar o parâmetro 'forma_emissao=offline' na URL de emissão para 'forçar' a contingência, ou seja, irá emitir a NFCe em contingência independente se a emissão de forma normal é possível ou não. Caso esse parâmetro não se faça presente, a emissão em contingência ocorrerá apenas nas situações que a compelem.
+    - Exemplo de URL: http://localhost:PORTA/v2/fiscal/nfce?ref=REFERENCIA&tipo_contingencia=TIPO&forma_emissao=offline
+
+### Efetivação de NFCe emitida em contingência
+
+- Após a NFCe ser emitida em contingência offline, o comunicador irá tentar efetiva-lá automaticamente quatro vezes com um intervalo de 30 minutos entre cada tentativa. 
+- Caso esgotem-se as quatro tentativas e ainda  não tenha sido possível efetivar a NFCe, seja devido a falta de conexão da máquina com a internet, ou por indisponibilidade de Gateway ou da Sefaz, o usuário poderá tentar efetivá-la manualmente por meio da API local utilizando a URL apresentada anteriormente. 
+    - É importante ressaltar que o usuário poderá tentar efetivar manualmente uma NFCe a qualquer momento por meio da API local, não sendo necessário esperar a finalização das tentativas automáticas do comunicador.
 
 ## Download
 
