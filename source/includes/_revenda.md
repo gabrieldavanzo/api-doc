@@ -15,8 +15,8 @@ Método | URL (recurso) | Ação
 POST|/v2/empresas | Cria uma nova empresa.
 GET|/v2/empresas | Consulta todas as empresas.
 GET|/v2/empresas/ID | Consulta uma a empresa a partir do seu identificador.
-PUT|/v2/empresa/ID | Altera os dados de uma empresa específica.
-DELETE|/v2/empresa/ID | Exclui uma empresa
+PUT|/v2/empresas/ID | Altera os dados de uma empresa específica.
+DELETE|/v2/empresas/ID | Exclui uma empresa
 
 ## Campos
 
