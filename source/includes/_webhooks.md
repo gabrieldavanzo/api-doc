@@ -101,7 +101,7 @@ Aqui você encontra os status possíveis para os gatilhos (webhooks).
 HTTP CODE/STATUS | Status API Focus | Descrição | Correção
 ---|---|---|---|
 404 - not found | nao_encontrado | Seu gatilho não foi encontrado. | Verifique se o seu gatilho foi criado com sucesso. Consulte nossa documentação.
-400 - bad request | requisicao_invalida | Parâmetro "event" deve ser nfe, nfse ou nfe_recebida. |  Informe um dos valores esperados para o parâmetro "event" e tente novamente.
+400 - bad request | requisicao_invalida | Parâmetro "event" deve ser um evento válido. |  Informe um dos valores esperados para o parâmetro "event" e tente novamente.
 400 - bad request | requisicao_invalida | Já existe um gatilho para este evento. | Não é possível ter mais de um gatilho por evento.
 400 - bad request | requisicao_invalida | URL inválida: X | Onde X é a URL inválida informado no retorno da API. Consulte nossa documentação.
 
@@ -123,6 +123,10 @@ Os seguintes eventos causam o acionamento do gatilho:
   * Erro na emissão de uma CTe
   * Emissão de CTe realizada com sucesso
   * CTe Denegada
+* **MDFe**:
+  * Erro na emissão de uma MDFe
+  * Emissão de MDFe realizada com sucesso
+  * MDFe Denegada
 
 ## Criação
 ```python
@@ -299,7 +303,7 @@ Utilize o método HTTP POST para criar um novo gatilho. Esta requisição aceita
 
 *  **cnpj** – CNPJ da empresa. Se o CNPJ for omitido, o gatilho será acionado para todas as emissões feitas pelo token em questão.
 *  **cpf** – CPF da empresa/prestador do serviço. Se o CPF for omitido, o gatilho será acionado para todas as emissões feitas pelo token em questão.
-*  **event** – Informe qual evento que gostará de escutar: nfe, nfse, nfe_recebida, nfse_recebida, inutilizacao, cte
+*  **event** – Informe qual evento que gostará de escutar: nfe, nfse, nfe_recebida, nfse_recebida, inutilizacao, cte, mdfe
 *  **url** – URL que deverá ser chamada quando o gatilho for ativado
 *  **authorization** – (opcional) O valor que for informado neste campo será devolvido no acionamento do gatilho no cabeçalho "Authorization".
 Desta forma você poderá por exemplo informar um token secreto para garantir que apenas nossa API acione a sua URL.
