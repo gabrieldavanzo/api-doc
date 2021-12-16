@@ -198,7 +198,9 @@ puts "Corpo da resposta: " + resposta.body
  $ch = curl_init();
  curl_setopt($ch, CURLOPT_URL, $server."v2/nfes_recebidas/".$chave."/manifesto");
  curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
- curl_setopt($ch, CURLOPT_POST, json_encode($tipo));
+ curl_setopt($ch, CURLOPT_POST, 1);
+ curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($tipo));
+
 
 /* Métodos para realizar a autenticação básica do HTTP.
    Não é necessário informar campo senha, apenas o campo login. */
