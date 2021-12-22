@@ -75,8 +75,8 @@ Os campos denotados com (*) são obrigatórios.
   - **4**: Cooperativa;
   - **5**: MEI - Simples Nacional;
   - **6**: ME EPP- Simples Nacional.
-* **optante_simples_nacional**(*): (Boolean) Informar verdadeiro ou falso se a empresa for optante pelo Simples Nacional. Campo ignorado por alguns municípios
-* **incentivador_cultural**: (Boolean) Informe verdadeiro ou falso. Valor padrão: falso. Campo ignorado em alguns municípios.
+* **optante_simples_nacional**(*): (Boolean) Informar 'true' (verdadeiro) ou 'false' (falso) se a empresa for optante pelo Simples Nacional. Campo ignorado por alguns municípios
+* **incentivador_cultural**: (Boolean) Informe 'true' (verdadeiro) ou 'false' (falso). Valor padrão: 'false'. Campo ignorado em alguns municípios.
 * **codigo_obra**: (String) Código da obra quando construção civil. Tamanho: 15 caracteres.
 * **art**: (String) Código ART quando construção civil. Este campo é ignorado em alguns municípios.
 * **numero_rps_substituido**: (String) Caso o município permita a substituição de notas, aqui você poderá
@@ -120,7 +120,7 @@ informar o número do RPS que será substituído. Municípios que seguem o padr�
 	- **valor_inss**: (Decimal) Valor do INSS.
 	- **valor_ir**: (Decimal) Valor do IRRF.
 	- **valor_csll**: (Decimal) Valor do CSLL
-	- **iss_retido**(*): (Boolean) Informar verdadeiro ou falso se o ISS foi retido.
+	- **iss_retido**(*): (Boolean) Informar 'true' (verdadeiro) ou 'false' (falso) se o ISS foi retido.
 	- **valor_iss**: (Decimal) Valor do ISS. Campo ignorado por alguns municípios que realizam seu próprio cálculo.
 	- **valor_iss_retido**: (Decimal) Valor do ISS Retido. Campo ignorado em alguns municípios.
 	- **outras_retencoes**: (Decimal) Valor de outras retenções. Campo ignorado em alguns municípios.
