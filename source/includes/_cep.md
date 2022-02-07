@@ -197,7 +197,9 @@ Utilize o método HTTP **GET**. São aceitos os seguintes parâmetros de pesquis
 * **logradouro**: Pesquisa pelo logradouro completo ou por parte dele. Mínimo de 3 caracteres.
 * **localidade**: Pesquisa pelo nome completo da localidade ou por parte dele.
 
-São necessários ao menos outros dois parâmetros, caso não seja informado o código IBGE para o munícipio.
+É necessário informar ao menos _dois_ parâmetros para consulta.
+
+No caso especial de Municípios que possuem um único CEP (não dividido em logradouros), é possível realizar a consulta informando apenas o `codigo_ibge` como parâmetro.
 
 Caso já saiba o CEP exato, e queira apenas recuperar sua descrição, utilize o link
 abaixo, substituindo CODIGO_CEP pelo código.
