@@ -110,6 +110,8 @@ Abaixo são listados todos os campos de uma empresa.
 | arquivo\_certificado\_base64                                 | texto em base 64 | Sim         | Sim          | Sim\*        | "Arquivo do certificado digital, em formato PFX ou P12, codificado em base64\. Nem todas as prefeituras necessitam de certificado para emissão de NFSe\."                  |
 | senha\_certificado                                           | texto            | Sim         | Sim          | Sim\*        | Senha do certificado digital\.                                                                                                                                             |
 | arquivo\_logo\_base64                                        | texto em base 64 |             |              |              | Logomarca da empresa para ser usada na DANFE\. Nem todas as prefeituras aceitam o uso de logo\. Utilize uma imagem em formato PNG de no máximo 200×200 pixels              |
+| login\_responsavel                                        | texto |             |              |              | Login para acesso da prefeitura. Necessário para emissão de NFSe em alguns municípios que não utilizam certificado digital.              |
+| senha\_responsavel                                        | texto |             |              |              | Senha para acesso da prefeitura. Necessário para emissão de NFSe em alguns municípios que não utilizam certificado digital. Por motivos de segurança, este atributo não é exibido na consulta da empresa após ser salvo. |
 
 ## Status API
 
