@@ -460,7 +460,7 @@ Por isso as notas fiscais recebidas possuem um campo chamado “**versao**” qu
 
 Por exemplo, se você recebe uma nota fiscal, com versao = 60, e ela posteriormente receber uma carta de correção ou for cancelada, sua versão será atualizada para algum número maior que 60.
 
-A API busca as últimas atualizações da SEFAZ de hora em hora.
+A API busca as últimas atualizações da SEFAZ a cada duas horas.
 
 **Método de consulta**
 
@@ -723,6 +723,10 @@ Para pesquisar as informações específicas de uma NFe, consulte:
 `https://api.focusnfe.com.br/v2/nfes_recebidas/CHAVE`
 
 Utilize o método **HTTP GET** para consultar os dados da nota fiscal.
+
+Isto irá devolver os mesmos campos descritos no item 2.2. Quando você tiver muitas empresas cadastradas, pode desambiguar o documento informando o parâmetro **cnpj=CNPJ**, da seguinte forma:
+
+`https://api.focusnfe.com.br/v2/nfes_recebidas/CHAVE?cnpj=CNPJ`
 
 Isto irá devolver os mesmos campos descritos no item 2.2. Você pode solicitar também os dados completos da nota informando o parâmetro **completa=1**, da seguinte forma:
 
