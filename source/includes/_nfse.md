@@ -28,18 +28,18 @@ Os campos denotados com (*) são obrigatórios.
 > Exemplo de um arquivo JSON:
 
 ```json
-{  
+{
    "data_emissao":"2017-09-21T22:15:00",
-   "prestador":{  
+   "prestador":{
       "cnpj":"18765499000199",
       "inscricao_municipal":"12345",
       "codigo_municipio":"3516200"
    },
-   "tomador":{  
+   "tomador":{
       "cnpj":"07504505000132",
       "razao_social":"Acras Tecnologia da Informação LTDA",
       "email":"contato@acras.com.br",
-      "endereco":{  
+      "endereco":{
          "logradouro":"Rua Dias da Rocha Filho",
          "numero":"999",
          "complemento":"Prédio 04 - Sala 34C",
@@ -49,7 +49,7 @@ Os campos denotados com (*) são obrigatórios.
          "cep":"80045165"
       }
    },
-   "servico":{  
+   "servico":{
       "aliquota":3,
       "discriminacao":"Nota fiscal referente a serviços prestados",
       "iss_retido":"false",
@@ -131,7 +131,7 @@ informar o número do RPS que será substituído. Municípios que seguem o padr�
 	- **item_lista_servico**(*): (String) Informar o código da lista de serviços, normalmente de acordo com a Lei Complementar 116/2003.
 	- **codigo_cnae**: (String) Informar o código CNAE de 7 dígitos. Campo ignorado em alguns municípios.
 	- **codigo_tributario_municipio**: (String) Informar o código tributário de acordo com a tabela de cada município (não há um padrão).
-	- **discriminacao**(*): (String) Discriminação dos serviços. Tamanho: 2000 caracteres.
+	- **discriminacao**(*): (String) Discriminação dos serviços. Tamanho: Varia por município.
 	- **codigo_municipio**(*): (String) Informar o código IBGE de 7 dígitos do município de prestação do serviço.
 	- **percentual_total_tributos**: (Decimal) Percentual aproximado de todos os impostos, de acordo com a Lei da Transparência. No momento disponível apenas alguns municípios.
 	- **fonte_total_tributos**: (String) Fonte de onde foi retirada a informação de total de impostos, por exemplo, “IBPT”. No momento disponível apenas para alguns municípios.
@@ -345,18 +345,18 @@ servidor_homologacao = "https://homologacao.focusnfe.com.br/"
 url_envio = servidor_homologacao + "v2/nfse?ref=" + ref
 
 # altere os campos conforme a nota que será enviada
-dados_da_nota = {  
+dados_da_nota = {
   data_emissao: "2017-09-21T22:15:00",
-  prestador: {  
+  prestador: {
       cnpj: "18765499000199",
       inscricao_municipal: "12345",
       codigo_municipio: "3516200"
   },
-  tomador: {  
+  tomador: {
       cnpj: "07504505000132",
       razao_social: "Acras Tecnologia da Informação LTDA",
       email: "contatoacras.com.br",
-      endereco: {  
+      endereco: {
         logradouro: "Rua Dias da Rocha Filho",
         numero: "999",
         complemento: "Prédio 04 - Sala 34C",
@@ -366,7 +366,7 @@ dados_da_nota = {
         cep: "80045165"
       }
   },
-  servico: {  
+  servico: {
       aliquota: 3,
       discriminacao: "Nota fiscal referente a serviços prestados",
       iss_retido: "false",
@@ -494,18 +494,18 @@ Passamos o token como quarto parametro deste metodo, como autenticador do HTTP B
 */
 request.open('POST', url, false, token);
 
-var nfse = {  
+var nfse = {
    "data_emissao":"2018-03-21",
-   "prestador":{  
+   "prestador":{
       "cnpj":"51916585000125",
       "inscricao_municipal":"12345",
       "codigo_municipio":"3518800"
    },
-   "tomador":{  
+   "tomador":{
       "cnpj":"07504505000132",
       "razao_social":"Acras Tecnologia da Informacao LTDA",
       "email":"contato@acras.com.br",
-      "endereco":{  
+      "endereco":{
          "logradouro":"Rua Filho da Rocha Bage",
          "numero":"750",
          "complemento":"Sala 07",
@@ -515,7 +515,7 @@ var nfse = {
          "cep":"80045165"
       }
    },
-   "servico":{  
+   "servico":{
       "aliquota":3,
       "discriminacao":"Nota fiscal referente a servicos prestados",
       "iss_retido":"false",
@@ -982,7 +982,7 @@ servidor_homologacao = "https://homologacao.focusnfe.com.br/"
 url_envio = servidor_homologacao + "v2/nfse/" + ref
 
 # altere os campos conforme a nota que será enviada
-justificativa_cancelamento = {  
+justificativa_cancelamento = {
   justificativa: "Informe aqui a sua justificativa para realizar o cancelamento da NFSe."
 }
 
