@@ -1,4 +1,4 @@
-# Comunicador Offline Focus NFe v2 (beta)
+# Comunicador Offline Focus NFe v2
 
 O Comunicador Offline Focus NFe consiste em uma aplicação desktop que permite a emissão de NFCe e CFe (SAT e MFe) de maneira simplificada, voltada especialmente para usuários de tecnologias que não permitem o acesso à API via Web Services ou que não desejam programar o acesso HTTP, podendo assim utilizar um sistema de processamento de diretórios para emissão de documentos fiscais. Ainda, a aplicação também disponibiliza uma API local para usuários que prefiram uma comunicação direta entre sistemas. As especificações descritas nessa seção são válidas para a build 3.0.0 e posteriores do executável.
 
@@ -22,7 +22,7 @@ Abaixo a descrição de cada 'Diretório de Comunicação' e a sua finalidade:
 * **danfe**: neste diretório é salvo a DANFE em formato .html. Não é gerado impressão quando o documento fiscal é cancelado.
 * **pdf**: neste diretório é salvo a DANFE e a impressão do CFe do S@T (Quando a opção de impressão direta é habilitada na tela de configurações). Não é gerado impressão quando o documento fiscal é cancelado.
 
-Observação: A geração do PDF foi removida do fluxo de autorização de cupons. Isso significa que o mesmo só é gerado caso a opção de impressão direta esteja ativada na tela de configurações. Ainda, na tela de histórico de documentos fiscais, é possível obter individualmente o PDF e o XML dos documentos autorizados. Além disso, o PDF também pode ser obtido via requisição direta na API Local. 
+Observação: A geração do PDF foi removida do fluxo de autorização de cupons. Isso significa que o mesmo só é gerado caso a opção de impressão direta esteja ativada na tela de configurações. Ainda, na tela de histórico de documentos fiscais, é possível obter individualmente o PDF e o XML dos documentos autorizados. Além disso, o PDF também pode ser obtido via requisição direta na API Local.
 
 <aside class="warning">
 O diretório que contém os logs do Comunicador Offline Focus NFe é sempre fixo em: <br>
@@ -481,7 +481,7 @@ GET|http://localhost:PORTA/v2/fiscal/sat/cfe/CHAVE_NFE.xml  | Gera o XML do cupo
 GET|http://localhost:PORTA/v2/fiscal/sat/cfe/CHAVE_NFE-canc.xml  | Gera o XML do cupom fiscal cancelado.
 POST|http://localhost:PORTA/v2/fiscal/nfce?ref=REFERENCIA  | Emite uma NFCe.
 DELETE|http://localhost:PORTA/v2/fiscal/nfce/REFERENCIA  | Cancela uma NFCe.
-GET|http://localhost:PORTA/v2/fiscal/nfce/CHAVE_NFE  | Retorna os dados da NFCe.
+GET|http://localhost:PORTA/v2/fiscal/nfce/REFERENCIA  | Retorna os dados da NFCe.
 GET|http://localhost:PORTA/v2/fiscal/nfce/CHAVE_NFE.pdf  | Gera o espelho da NFCe em PDF.
 GET|http://localhost:PORTA/v2/fiscal/nfce/CHAVE_NFE.xml  | Gera o XML da NFCe.
 GET|http://localhost:PORTA/v2/fiscal/nfce/CHAVE_NFE-canc.xml  | Gera o XML da NFCe cancelada.
@@ -500,7 +500,7 @@ A extração dos logs retorna os logs do equipamento SAT/MFe conectado no comput
 A emissão de um cupom retorna um json com os detalhes da autorização feita pelo equipamento SAT/MFe conectado no computador do usuário.
 
 ### Cancelar cupom fiscal
-O cancelamento de um cupom retorna um json com os detalhes do cancelamento feito pelo equipamento SAT/MFe conectado no computador do usuário. 
+O cancelamento de um cupom retorna um json com os detalhes do cancelamento feito pelo equipamento SAT/MFe conectado no computador do usuário.
 
 ### Gerar espelho PDF
 A geração do espelho é feita com base no XML retornado pelo equipamento S@T/MFe e retornado na requisição em formato PDF.
@@ -515,7 +515,7 @@ A emissão de uma NFCe retorna um json com os detalhes da autorização feita pe
 O cancelamento de uma NFCe retorna um json com os detalhes do cancelamento feita pela API da Focus NFe.
 
 ### Contingência NFCe (beta)
-A Contingência NFCe é utilizada quando o estabelicimento não é capaz de se comunicar com a Sefaz. Isso pode ocorrer em situações de falta de conexão com a internet, indisponibilidade do Gateway ou indisponibilidade da Sefaz.  
+A Contingência NFCe é utilizada quando o estabelicimento não é capaz de se comunicar com a Sefaz. Isso pode ocorrer em situações de falta de conexão com a internet, indisponibilidade do Gateway ou indisponibilidade da Sefaz.
 
 ### URLs
 
@@ -527,18 +527,18 @@ GET  | http://localhost:PORTA/v2/fiscal/nfce/pendentes                          
 
 ### Emissão de NFCe em contingência
 
-- O parâmetro **TIPO** tem dois valores possíveis: **sat** e **offline**. 
+- O parâmetro **TIPO** tem dois valores possíveis: **sat** e **offline**.
     - Caso seja informado **sat**, a emissão em contingência será feita utilizando o aparelho S@T (essa opção só funcionará nos estados em que esse aparelho é utilizado).
-    - Caso seja informado **offline**, será emitida uma NFCe provisória que irá ser enviada posteriormente para efetivação. 
+    - Caso seja informado **offline**, será emitida uma NFCe provisória que irá ser enviada posteriormente para efetivação.
 - Há a opção de informar o parâmetro **forma_emissao=offline** na URL de emissão para 'forçar' a contingência, ou seja, irá emitir a NFCe em contingência independente se a emissão de forma normal é possível ou não. Caso esse parâmetro não se faça presente, a emissão em contingência ocorrerá apenas nas situações que a compelem.
-    
-    Exemplo de uso: 
+
+    Exemplo de uso:
     ```http://localhost:PORTA/v2/fiscal/nfce?ref=REFERENCIA&tipo_contingencia=TIPO&forma_emissao=offline```
 
 ### Efetivação de NFCe emitida em contingência
 
-- Após a NFCe ser emitida em contingência offline, o comunicador irá tentar efetiva-lá automaticamente quatro vezes com um intervalo de 30 minutos entre cada tentativa. 
-- Caso esgotem-se as quatro tentativas e ainda  não tenha sido possível efetivar a NFCe, seja devido a falta de conexão da máquina com a internet, ou por indisponibilidade de Gateway ou da Sefaz, o usuário poderá tentar efetivá-la manualmente por meio da API local utilizando a URL apresentada anteriormente. 
+- Após a NFCe ser emitida em contingência offline, o comunicador irá tentar efetiva-lá automaticamente quatro vezes com um intervalo de 30 minutos entre cada tentativa.
+- Caso esgotem-se as quatro tentativas e ainda  não tenha sido possível efetivar a NFCe, seja devido a falta de conexão da máquina com a internet, ou por indisponibilidade de Gateway ou da Sefaz, o usuário poderá tentar efetivá-la manualmente por meio da API local utilizando a URL apresentada anteriormente.
     - É importante ressaltar que o usuário poderá tentar efetivar manualmente uma NFCe a qualquer momento por meio da API local, não sendo necessário esperar a finalização das tentativas automáticas do comunicador.
 
 ## Download
