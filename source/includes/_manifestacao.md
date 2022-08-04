@@ -98,7 +98,7 @@ public class Manifestar {
 		String server = "https://homologacao.focusnfe.com.br/";
 		String url = server.concat("v2/nfes_recebidas/"+chave+"/manifesto");
 
-		/* Aqui criamos um hashmap para receber a chave "tipo" e o valor que pode ser: ciencia, confirmacao, desconhecimento ou nao_realizada. */		
+		/* Aqui criamos um hashmap para receber a chave "tipo" e o valor que pode ser: ciencia, confirmacao, desconhecimento ou nao_realizada. */
 		HashMap<String, String> tipoManifestacao = new HashMap<String, String>();
 		tipoManifestacao.put("tipo", "nao_realizada");
 
@@ -148,7 +148,7 @@ servidor_homologacao = "https://homologacao.focusnfe.com.br/"
 url_envio = servidor_homologacao + "v2/nfes_recebidas/" + chave + "/manifesto"
 
 # altere os campos conforme a nota que será enviada
-tipo_manifestacao = {  
+tipo_manifestacao = {
   tipo: "nao_realizada",
 }
 
@@ -193,7 +193,7 @@ puts "Corpo da resposta: " + resposta.body
 /* Aqui enviamos o tipo de manifestação que desejamos realizar.
    Consulte nossa documentação, para conhecer os demais tipos possíveis: https://goo.gl/a9o7hm */
  $tipo = array("tipo" => "confirmacao");
-// Para ambiente de Produção, utilize a URL: https://api.focusnfe.com.br/.  
+// Para ambiente de Produção, utilize a URL: https://api.focusnfe.com.br/.
  $server = "https://homologacao.focusnfe.com.br/";
  $ch = curl_init();
  curl_setopt($ch, CURLOPT_URL, $server."v2/nfes_recebidas/".$chave."/manifesto");
@@ -209,7 +209,7 @@ puts "Corpo da resposta: " + resposta.body
  $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 // Mostra na tela o HTTP Code da sua requisição.
  print($http_code);
-// Mostra na tela a mensagem de retorno da API.   
+// Mostra na tela a mensagem de retorno da API.
  print($body);
  curl_close($ch);
 ?>
@@ -431,7 +431,7 @@ puts "Corpo da resposta: " + resposta.body
 // Solicite o seu token para realizar as requisições com nossa equipe de suporte.
  $login = "Token_obtido_no_cadastro_da_empresa";
  $chave = "Chave_de_identificação_da_NFe";
-// Para ambiente de Produção, utilize a URL: https://api.focusnfe.com.br/.  
+// Para ambiente de Produção, utilize a URL: https://api.focusnfe.com.br/.
  $server = "https://homologacao.focusnfe.com.br/";
 
  $ch = curl_init();
@@ -446,7 +446,7 @@ puts "Corpo da resposta: " + resposta.body
  $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 // Mostra na tela o HTTP Code da sua requisição.
  print($http_code);
-// Mostra na tela a mensagem de retorno da API.   
+// Mostra na tela a mensagem de retorno da API.
  print($body);
  curl_close($ch);
 ?>
@@ -583,7 +583,7 @@ puts "Corpo da resposta: " + resposta.body
 // Solicite o seu token para realizar as requisições com nossa equipe de suporte.
  $login = "Token_obtido_no_cadastro_da_empresa";
  $cnpj = "CNPJ_da_sua_empresa";
-// Para ambiente de Produção, utilize a URL: https://api.focusnfe.com.br/.  
+// Para ambiente de Produção, utilize a URL: https://api.focusnfe.com.br/.
  $server = "https://homologacao.focusnfe.com.br/";
 
  $ch = curl_init();
@@ -591,7 +591,7 @@ puts "Corpo da resposta: " + resposta.body
    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
    curl_setopt($ch, CURLOPT_HTTPHEADER, array());
 /* Métodos para realizar a autenticação básica do HTTP.
-   Não é necessário informar campo senha, apenas o campo login. */  
+   Não é necessário informar campo senha, apenas o campo login. */
    curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
    curl_setopt($ch, CURLOPT_USERPWD, "$login");
 
@@ -599,7 +599,7 @@ puts "Corpo da resposta: " + resposta.body
  $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 // Mostra na tela o HTTP Code da sua requisição.
    print($http_code);
-// Mostra na tela a mensagem de retorno da API.   
+// Mostra na tela a mensagem de retorno da API.
    print($body);
    curl_close($ch);
 ?>
@@ -702,7 +702,7 @@ Os dados devolvidos no corpo da requisição serão um array de objetos em JSON 
 * **nfe_completa**: Se verdadeiro, indica que temos o XML completo da nota, caso contrário o sistema possui apenas o cabeçalho da nota.
 - **tipo_nfe**:
 	- **1**: Saída;
-	- **2**: Entrada.
+	- **0**: Entrada.
 * **versao**: Versão da nota fiscal. Este número irá mudar apenas se a nota fiscal for alterada de alguma forma.
 * **digest_value**: Valor do resumo digital do XML da nota.
 * **numero_carta_correcao**: Número sequencial da carta de correção, caso tenha sido emitida alguma.
@@ -899,14 +899,14 @@ puts "Corpo da resposta: " + resposta.body
 // Solicite o seu token para realizar as requisições com nossa equipe de suporte.
  $login = "Token_obtido_no_cadastro_da_empresa";
  $chave = "Chave_de_identificação_da_NFe";
-// Para ambiente de Produção, utilize a URL: https://api.focusnfe.com.br/.  
+// Para ambiente de Produção, utilize a URL: https://api.focusnfe.com.br/.
  $server = "https://homologacao.focusnfe.com.br/";
  $ch = curl_init();
  curl_setopt($ch, CURLOPT_URL, $server."v2/nfes_recebidas/".$chave.".xml");
  curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
  curl_setopt($ch, CURLOPT_HTTPHEADER, array());
 /* Métodos para realizar a autenticação básica do HTTP.
-   Não é necessário informar campo senha, apenas o campo login. */  
+   Não é necessário informar campo senha, apenas o campo login. */
  curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
  curl_setopt($ch, CURLOPT_USERPWD, "$login");
  $body = curl_exec($ch);
@@ -1076,7 +1076,7 @@ puts "Corpo da resposta: " + resposta.body
 // Solicite o seu token para realizar as requisições com nossa equipe de suporte.
  $login = "Token_obtido_no_cadastro_da_empresa";
  $chave = "Chave_de_identificação_da_NFe";
-// Para ambiente de Produção, utilize a URL: https://api.focusnfe.com.br/.  
+// Para ambiente de Produção, utilize a URL: https://api.focusnfe.com.br/.
  $server = "https://homologacao.focusnfe.com.br/";
  $ch = curl_init();
  curl_setopt($ch, CURLOPT_URL, $server."v2/nfes_recebidas/".$chave.".json?completa=1");
@@ -1090,7 +1090,7 @@ puts "Corpo da resposta: " + resposta.body
  $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 // Mostra na tela o HTTP Code da sua requisição.
  print($http_code);
-// Mostra na tela a mensagem de retorno da API.   
+// Mostra na tela a mensagem de retorno da API.
  print($body);
  curl_close($ch);
 ?>
@@ -1251,14 +1251,14 @@ puts "Corpo da resposta: " + resposta.body
 // Solicite o seu token para realizar as requisições com nossa equipe de suporte.
  $login = "Token_obtido_no_cadastro_da_empresa";
  $chave = "Chave_de_identificação_da_NFe";
-// Para ambiente de Produção, utilize a URL: https://api.focusnfe.com.br/.  
+// Para ambiente de Produção, utilize a URL: https://api.focusnfe.com.br/.
  $server = "https://homologacao.focusnfe.com.br/";
  $ch = curl_init();
  curl_setopt($ch, CURLOPT_URL, $server."v2/nfes_recebidas/".$chave."/cancelamento.xml");
  curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
  curl_setopt($ch, CURLOPT_HTTPHEADER, array());
 /* Métodos para realizar a autenticação básica do HTTP.
-   Não é necessário informar campo senha, apenas o campo login. */   
+   Não é necessário informar campo senha, apenas o campo login. */
  curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
  curl_setopt($ch, CURLOPT_USERPWD, "$login");
  $body = curl_exec($ch);
@@ -1425,7 +1425,7 @@ puts "Corpo da resposta: " + resposta.body
 // Solicite o seu token para realizar as requisições com nossa equipe de suporte.
  $login = "Token_obtido_no_cadastro_da_empresa";
  $chave = "Chave_de_identificação_da_NFe";
-// Para ambiente de Produção, utilize a URL: https://api.focusnfe.com.br/.  
+// Para ambiente de Produção, utilize a URL: https://api.focusnfe.com.br/.
  $server = "https://homologacao.focusnfe.com.br/";
  $ch = curl_init();
  curl_setopt($ch, CURLOPT_URL, $server."v2/nfes_recebidas/".$chave."/carta_correcao.xml");
