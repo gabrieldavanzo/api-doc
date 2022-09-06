@@ -140,6 +140,14 @@ onde eventualmente será processada (processamento assíncrono). Com isto, a not
 
 Para verificar se a nota já foi autorizada, você terá que efetuar uma [consulta](#mdfe_consulta).
 
+### Emissão em contingência offline
+
+Para enviar uma MDF-e em contingência offline utilize a URL abaixo, alterando o ambiente de produção para homologação, caso esteja emitindo notas de teste.
+
+`https://api.focusnfe.com.br/v2/mdfe?ref=REFERENCIA&contingencia=1`
+
+É importante ressaltar que atualmente não há a possibilidade de envio de MDF-e em contingência offline de forma automática, apenas de forma manual, utilizando o parâmetro **contingencia=1**.
+
 ## Consulta
 
 ```shell
