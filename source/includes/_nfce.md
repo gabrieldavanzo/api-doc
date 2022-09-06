@@ -740,7 +740,9 @@ Ao tentar emitir uma NFCe, iremos tentar comunicação com a SEFAZ. Caso a comun
 Será de responsabilidade de nossa API, após devolver o XML e DANFCe temporários, tentar reestabelecer comunicação com a SEFAZ ao longo das próximas 24 horas após a emissão. Quando conseguirmos conectividade novamente serão efetuadas duas ações:
 
 * A nota emitida em contingência será efetividade na SEFAZ e iremos substituir o XML e DANFCe por suas versões definitivas
-* Iremos consultar o status da requisição original. Caso a nota tenha sido autorizada, é feito o cancelamento da nota. Caso ela realmente não tenha sido autorizada, o número é reaproveitado para as próximas emissões.
+* Iremos consultar o status da requisição original. Caso a nota tenha sido autorizada, é feito o cancelamento da nota. Caso ela realmente não tenha sido autorizada, o número é inutilizado. 
+
+É possível que uma nota emitida em contingência não possa ser efetivada devido a erros no XML (como por exemplo, NCM incorreto ou impostos inconsistentes). Neste caso tanto o número da nota original quanto o número da nota em contingência serão inutilizados automaticamente.
 
 O sistema cliente da API pode acompanhar este processo de forma transparente, conforme descrito na seção “Consulta” deste manual.
 
