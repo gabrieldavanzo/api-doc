@@ -1,10 +1,10 @@
-# Revenda
+# Empresas
 
-A API para revenda consiste em uma série de métodos para criar e habilitar automaticamente uma empresa para emissão de documentos fiscais (NFe, NFCe ou NFSe). São disponibilizados os métodos para criar uma empresa, buscar dados de uma empresa ou listar todas as empresas. Cada empresa possui um identificador único (campo id) que você deverá armazenar em sua base de dados para poder alterar ou buscar dados da empresa posteriormente.
+A API para empresas consiste em uma série de métodos para criar e habilitar automaticamente uma empresa para emissão de documentos fiscais (NFe, NFCe ou NFSe). São disponibilizados os métodos para criar uma empresa, buscar dados de uma empresa ou listar todas as empresas. Cada empresa possui um identificador único (campo id) que você deverá armazenar em sua base de dados para poder alterar ou buscar dados da empresa posteriormente.
 
 **Ambientes**
 
-A API de Revendas opera exclusivamente no ambiente de produção, não sendo possível realizar operações em homologação. Porém, quando aplicável, adicionamos o parâmetro opcional dry_run=1 que permite que a criação da empresa seja simulada sem que seja efetivamente efetuada no nosso banco de dados. Desta forma você poderá testar as chamadas antes de implementá-las em produção.
+A API de Empresas opera exclusivamente no ambiente de produção, não sendo possível realizar operações em homologação. Porém, quando aplicável, adicionamos o parâmetro opcional dry_run=1 que permite que a criação da empresa seja simulada sem que seja efetivamente efetuada no nosso banco de dados. Desta forma você poderá testar as chamadas antes de implementá-las em produção.
 
 Uma vez criada a empresa no ambiente de produção, você poderá emitir documentos fiscais no ambiente de homologação e produção usando esta empresa.
 
@@ -115,7 +115,7 @@ Abaixo são listados todos os campos de uma empresa.
 
 ## Status API
 
-Aqui você encontra um resumo dos status possíveis para a API de revenda.
+Aqui você encontra um resumo dos status possíveis para a API de empresas.
 
 HTTP CODE/STATUS | Status API Focus | Descrição | Correção
 ---|---|---|---|
