@@ -1,10 +1,10 @@
-# Revenda
+# Empresas
 
-A API para revenda consiste em uma série de métodos para criar e habilitar automaticamente uma empresa para emissão de documentos fiscais (NFe, NFCe ou NFSe). São disponibilizados os métodos para criar uma empresa, buscar dados de uma empresa ou listar todas as empresas. Cada empresa possui um identificador único (campo id) que você deverá armazenar em sua base de dados para poder alterar ou buscar dados da empresa posteriormente.
+A API para empresas consiste em uma série de métodos para criar e habilitar automaticamente uma empresa para emissão de documentos fiscais (NFe, NFCe ou NFSe). São disponibilizados os métodos para criar uma empresa, buscar dados de uma empresa ou listar todas as empresas. Cada empresa possui um identificador único (campo id) que você deverá armazenar em sua base de dados para poder alterar ou buscar dados da empresa posteriormente.
 
 **Ambientes**
 
-A API de Revendas opera exclusivamente no ambiente de produção, não sendo possível realizar operações em homologação. Porém, quando aplicável, adicionamos o parâmetro opcional dry_run=1 que permite que a criação da empresa seja simulada sem que seja efetivamente efetuada no nosso banco de dados. Desta forma você poderá testar as chamadas antes de implementá-las em produção.
+A API de Empresas opera exclusivamente no ambiente de produção, não sendo possível realizar operações em homologação. Porém, quando aplicável, adicionamos o parâmetro opcional dry_run=1 que permite que a criação da empresa seja simulada sem que seja efetivamente efetuada no nosso banco de dados. Desta forma você poderá testar as chamadas antes de implementá-las em produção.
 
 Uma vez criada a empresa no ambiente de produção, você poderá emitir documentos fiscais no ambiente de homologação e produção usando esta empresa.
 
@@ -83,6 +83,18 @@ Abaixo são listados todos os campos de uma empresa.
 | habilita\_mdfe                                               | booleano         | N/A         | N/A          | N/A          | Informa se empresa será habilitada para emissão de MDFe (Manifesto Eletrônico de Documentos Fiscais - usado por emitentes de CTe)
 | habilita\_manifestacao                                               | booleano         | N/A         | N/A          | N/A          | Informa se empresa será habilitada para busca de NFe recebidas para realização de manifestação do destinatário (MDe)
 | habilita\_manifestacao_cte                                               | booleano         | N/A         | N/A          | N/A          | Informa se empresa será habilitada para busca de CTes recebidas
+| habilita\_contingencia\_offline\_nfce                        | booleano         | N/A         | N/A          | N/A          | Informa se empresa será habilitada para contingência offline de NFCe
+| reaproveita\_numero\_nfce\_contingencia                      | booleano         | N/A         | N/A          | N/A          | Informa se empresa será habilitada para reaproveitar número de NFCe emitido em contingência
+| orientacao\_danfe                                            | texto            | Não         | N/A          | N/A          | Orientação da DANFe. Valores possíveis: portrait, para orientação retrato; ou ladscape, para orientação paisagem.
+| recibo\_danfe                                                | booleano         | Não         | N/A          | N/A          | Informa se empresa será habilitada para exibir recibo na DANFe.
+| exibe\_sempre\_ipi\_danfe                                    | booleano         | Não         | N/A          | N/A          | Informa se empresa será habilitada para imprimir sempre colunas do IPI
+| exibe\_issqn\_danfe                                          | booleano         | Não         | N/A          | N/A          | Informa se empresa será habilitada para mostra dados do ISSQN
+| exibe\_impostos\_adicionais\_danfe                           | booleano         | Não         | N/A          | N/A          | Informa se empresa será habilitada para imprimir impostos adicionais na DANFe (II, PIS, COFINS, ICMS UF Destino, ICMS UF Remetente, valor total tributos)
+| exibe\_sempre\_volumes\_danfe                                | booleano         | Não         | N/A          | N/A          | Informa se empresa será habilitada para sempre mostrar volumes na DANFe
+| exibe\_composicao\_carga\_mdfe                               | booleano         | Não         | N/A          | N/A          | Informa se empresa será habilitada para mostrar composição da carga na MDFe
+| enviar\_email\_destinatario                                  | booleano         |          |           |           | Informa se empresa será habilitada para enviar email ao destinatário em produção
+| enviar\_email\_homologacao                                   | booleano         |          |           |           | Informa se empresa será habilitada para enviar email ao destinatário em homologação
+| discrimina\_impostos                                         | booleano         |          |           |           | Informa se empresa será habilitada para discriminar impostos de NFe e NFCe
 | csc\_nfce\_producao                                          | texto            | N/A         | Sim          | N/A          | CSC para emissão de NFCe em ambiente de produção\. Sem este campo não será possível emitir NFCe em produção\. Veja com o SEFAZ do seu estado como gerar este código\.      |
 | id\_token\_nfce\_producao                                    | numérico         | N/A         | Sim          | N/A          | Id do CSC para emissão de NFCe em ambiente de produção\. Sem este campo não será possível emitir NFCe em produção\.Veja com o SEFAZ do seu estado como gerar este número\. |
 | csc\_nfce\_homologacao                                       | texto            | N/A         |              | N/A          | CSC para emissão de NFCe em ambiente de homologação\. Sem este campo não será possível emitir NFCe em homologação\.                                                        |
@@ -90,7 +102,11 @@ Abaixo são listados todos os campos de uma empresa.
 | proximo\_numero\_nfe\_producao                               | numérico         |             | N/A          | N/A          | Próximo número da NFe a ser emitida em produção\. Calculado automaticamente\.                                                                                              |
 | proximo\_numero\_nfe\_homologacao                            | numérico         |             | N/A          | N/A          | Próximo número da NFe a ser emitida em homologação\. Calculado automaticamente\.                                                                                           |
 | serie\_nfe\_producao                                         | numérico         |             | N/A          | N/A          | Série da NFe a ser emitida em produção\. Valor padrão: 1                                                                                                                   |
-| serie\_nfe\_homologacao                                      | numérico         |             | N/A          | N/A          | Série da NFe a ser emitida em homologação\. Valor padrão: 1                                                                                                                |
+| serie\_nfe\_homologacao                                      | numérico         |             | N/A          | N/A          | Série da NFe a ser emitida em homologação\. Valor padrão: 1
+| proximo\_numero\_nfce\_producao                              | numérico         |             | N/A          | N/A          | Próximo número da NFCe a ser emitida em produção\. Calculado automaticamente\.
+| proximo\_numero\_nfce\_homologacao                           | numérico         |             | N/A          | N/A          | Próximo número da NFCe a ser emitida em homologação\. Calculado automaticamente\.
+| serie\_nfce\_producao                                        | numérico         |             | N/A          | N/A          | Série da NFCe a ser emitida em produção\. Valor padrão: 1                                                                                                                   |
+| serie\_nfce\_homologacao                                     | numérico         |             | N/A          | N/A          | Série da NFCe a ser emitida em homologação\. Valor padrão: 1                                                                                                                |
 | proximo\_numero\_nfse\_producao                              | numérico         | N/A         | N/A          |              | Próximo número do RPS da NFSe a ser emitida em produção\. Calculado automaticamente\.                                                                                      |
 | proximo\_numero\_nfse\_homologacao                           | numérico         | N/A         | N/A          |              | Próximo número do RPS da NFSe a ser emitida em homologação\. Calculado automaticamente\.                                                                                   |
 | serie\_nfse\_producao                                        | numérico         | N/A         | N/A          |              | Série do RPS para envio de NFSe em produção\. Algumas prefeituras não utilizam\.                                                                                           |
@@ -110,12 +126,14 @@ Abaixo são listados todos os campos de uma empresa.
 | arquivo\_certificado\_base64                                 | texto em base 64 | Sim         | Sim          | Sim\*        | "Arquivo do certificado digital, em formato PFX ou P12, codificado em base64\. Nem todas as prefeituras necessitam de certificado para emissão de NFSe\."                  |
 | senha\_certificado                                           | texto            | Sim         | Sim          | Sim\*        | Senha do certificado digital\.                                                                                                                                             |
 | arquivo\_logo\_base64                                        | texto em base 64 |             |              |              | Logomarca da empresa para ser usada na DANFE\. Nem todas as prefeituras aceitam o uso de logo\. Utilize uma imagem em formato PNG de no máximo 200×200 pixels              |
-| login\_responsavel                                        | texto |             |              |              | Login para acesso da prefeitura. Necessário para emissão de NFSe em alguns municípios que não utilizam certificado digital.              |
-| senha\_responsavel                                        | texto |             |              |              | Senha para acesso da prefeitura. Necessário para emissão de NFSe em alguns municípios que não utilizam certificado digital. Por motivos de segurança, este atributo não é exibido na consulta da empresa após ser salvo. |
+| nome\_responsavel                                             | texto            |          |           |           | | Nome do responsável pela empresa
+| cpf\_responsavel                                              | texto            |          |           |           | | CPF do resonsável pela empresa
+| login\_responsavel                                            | texto |             |              |              | Login para acesso da prefeitura. Necessário para emissão de NFSe em alguns municípios que não utilizam certificado digital.              |
+| senha\_responsavel                                            | texto |             |              |              | Senha para acesso da prefeitura. Necessário para emissão de NFSe em alguns municípios que não utilizam certificado digital. Por motivos de segurança, este atributo não é exibido na consulta da empresa após ser salvo. |
 
 ## Status API
 
-Aqui você encontra um resumo dos status possíveis para a API de revenda.
+Aqui você encontra um resumo dos status possíveis para a API de empresas.
 
 HTTP CODE/STATUS | Status API Focus | Descrição | Correção
 ---|---|---|---|
