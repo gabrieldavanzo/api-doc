@@ -351,7 +351,9 @@ curl -u "token obtido no cadastro da empresa:" \
   "certificado_valido_de": null,
   "certificado_cnpj": null,
   "data_ultima_emissao": null,
-  "caminho_logo": null
+  "caminho_logo": null,
+  "token_producao": null,
+  "token_homologacao": null
 }
 ```
 
@@ -369,6 +371,7 @@ Uma empresa pode ser visualizada usando o seguinte endereço
 `https://api.focusnfe.com.br/v2/empresas/ID`
 
 Onde ID é o id da empresa fornecido no momento da criação. Utilize o comando **HTTP GET**. O resultado será todos os dados da empresa.
+Além dos campos utilizados para criação da empresa, a consulta retornará também os campos `token_producao` e `token_homologacao` que são gerados pela API para interações nos ambientes de produção e homologação.
 
 ## Alteração de empresa
 
