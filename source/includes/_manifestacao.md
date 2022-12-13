@@ -3,7 +3,7 @@
 
 A API para manifestação do sistema Focus permite que você consulte todas as notas recebidas pela sua empresa (modelo 55) e permite que você realize a manifestação frente a receita, informando se a operação descrita na nota foi realizada ou não. A API faz ainda a guarda de todos os documentos recebidos para que você consulte quando precisar.
 
-Através desta documentação deverá ser possível fazer a integração com a API do Focus NFe, caso alguma dúvida permaneça você pode entrar em contato com o suporte especializado através do e-mail suporte@acras.com.br.
+Através desta documentação deverá ser possível fazer a integração com a API do Focus NFe, caso alguma dúvida permaneça você pode entrar em contato com o suporte especializado através do e-mail suporte@focusnfe.com.br.
 
 ## URLs
 
