@@ -999,7 +999,7 @@ Campos de retorno:
 
 * **status:** A situação da NFCe, podendo ser:
    * **autorizado:** A nota foi autorizada, neste caso é fornecido os dados completos da nota como chave e arquivos para download
-   * **cancelado:** O documento foi cancelado, neste caso é fornecido o caminho para download do XML de cancelamento (caminho_xml_cancelamento).
+   * **cancelado:** O documento foi cancelado, neste caso é fornecido o caminho para download do XML de cancelamento (caminho_xml_cancelamento) e o numero do protocolo de cancelamento (numero_protocolo).
    * **erro_autorizacao:** Houve um erro de autorização por parte da SEFAZ. A mensagem de erro você encontrará nos campos status_sefaz e mensagem_sefaz. É possível fazer o reenvio da nota com a mesma referência se ela estiver neste estado.
    * **denegado:** O documento foi denegado. Uma SEFAZ pode denegar uma nota se houver algum erro cadastral nos dados do destinatário ou do emitente. A mensagem de erro você encontrará nos campos status_sefaz e mensagem_sefaz. Não é possível reenviar a nota caso este estado seja alcançado pois é gerado um número, série, chave de NFe e XML para esta nota. O XML deverá ser armazenado pelo mesmo período de uma nota autorizada ou cancelada.
 * **status_sefaz:** O status da nota na SEFAZ.
@@ -1012,6 +1012,7 @@ Campos de retorno:
 * **caminho_xml_nota_fiscal:** caso a nota tenha sido autorizada, retorna o caminho para download do XML.
 * **caminho_danfe:** caso a nota tenha sido autorizada retorna o caminho para download do DANFCe. O formato devolvido será '.html'.
 * **caminho_xml_cancelamento:** Caso a nota esteja cancelada, é fornecido o caminho para fazer o download do XML de cancelamento.
+* **numero_protocolo:** Caso a nota tenha sido cancelada, será informado aqui o número do protocolo do cancelamento.
 * **contingencia_offline** Este campo irá aparecer apenas quando a nota tiver sido emitida em contingência offline.
 * **contingencia_offline_efetivada** Quando a nota tiver sido emitida em contingência offline, este campo irá mostrar se a nota já foi efetivada (transmitida para a SEFAZ) ou não.
 * **tentativa_anterior**: Nos casos de contingência offline, esta chave irá conter outros campos quando conseguirmos determinar o que houve com a tentativa original. Esta seção poderá conter os seguintes campos:
@@ -1021,6 +1022,7 @@ Campos de retorno:
  * chave_nfe
  * caminho_xml_nota_fiscal
  * caminho_xml_cancelamento
+ * numero_protocolo
 
 
 Caso na requisição seja passado o parâmetro `completa=1` será adicionado mais 6 campos:
@@ -1151,7 +1153,8 @@ Existe obrigatoriedade legal para armazenar o XML de todas as notas NFCe (modelo
   "serie": "1",
   "chave_nfe": "NFe41190607504505000132650010000000121743484310",
   "caminho_xml_nota_fiscal": "/arquivos_development/07504505000132/201906/XMLs/41190607504505000132650010000000121743484310-nfe.xml",
-  "caminho_xml_cancelamento": "/arquivos_development/07504505000132/201906/XMLs/41190607504505000132650010000000121743484310-can.xml"
+  "caminho_xml_cancelamento": "/arquivos_development/07504505000132/201906/XMLs/41190607504505000132650010000000121743484310-can.xml",
+  "numero_protocolo": "141230000025397"
 }
 ```
 
@@ -1396,6 +1399,7 @@ A API irá em seguida devolver os seguintes campos:
 * **status_sefaz:** O status do cancelamento na SEFAZ.
 * **mensagem_sefaz:** Mensagem descritiva da SEFAZ detalhando o status.
 * **caminho_xml_cancelamento:** Caso a nota tenha sido cancelada, será informado aqui o caminho para download do XML de cancelamento.
+* **numero_protocolo:** Caso a nota tenha sido cancelada, será informado aqui o número do protocolo do cancelamento.
 
 **Prazo de cancelamento**
 
@@ -1410,7 +1414,8 @@ A NFCe poderá ser cancelada em até 30 minutos após a emissão.
   "status_sefaz": "135",
   "mensagem_sefaz": "Evento registrado e vinculado a NF-e",
   "status": "cancelado",
-  "caminho_xml_cancelamento": "/arquivos_development/07504505000132/201906/XMLs/41190607504505000132650010000000121743484310-can.xml"
+  "caminho_xml_cancelamento": "/arquivos_development/07504505000132/201906/XMLs/41190607504505000132650010000000121743484310-can.xml",
+  "numero_protocolo": "141230000025397"
 }
 ```
 
