@@ -402,9 +402,9 @@ interno;
 * <strong>valor_frete</strong>: Valor total do frete. Assume zero se não informado.
 * <strong>valor_seguro</strong>: Valor total do seguro. Assume zero se não informado.
 * <strong>valor_desconto</strong>: Valor total do desconto. Assume zero se não informado.
-* <strong>valor_ipi</strong>: Valor total do IPI. Assume zero se não informado.
-* <strong>valor_pis</strong>: Valor do PIS. Assume zero se não informado.
-* <strong>valor_cofins</strong>: Valor do COFINS. Assume zero se não informado.
+* <strong>ipi_valor</strong>: Valor total do IPI. Assume zero se não informado.
+* <strong>pis_valor</strong>: Valor do PIS. Assume zero se não informado.
+* <strong>cofins_valor</strong>: Valor do COFINS. Assume zero se não informado.
 * <strong>valor_outras_despesas</strong>: Valor das despesas acessórias. Assume zero se não informado.
 * <strong>valor_total</strong>: Valor total da nota fiscal.
 * <strong>modalidade_frete</strong>: Indica a modalidade do frete da operação. Valores possíveis:
