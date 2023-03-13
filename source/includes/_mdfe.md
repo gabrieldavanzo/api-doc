@@ -88,14 +88,14 @@ POST |	/v2/mdfe/REFERENCIA/encerrar	| Encerra uma MDF-e
 
 Abaixo você poderá consultar os campos da MDF-e. Nesta página, você pode buscar os campos pela TAG XML ou pela nossa tradução para API.
 
-[Documentação completa dos campos MDF-e](https://focusnfe.com.br/dsl/mdfe3.0/MDFeXML.html)
+[Documentação completa dos campos MDF-e](https://campos.focusnfe.com.br/mdfe/MDFeXML.html)
 
 Além dos campos descritos acima, cada MDF-e deverá obrigatoriamente informar um **modal**, que é a forma de transporte da carga. Você deverá informar uma das seguintes chaves nos dados, clique em cada link para visualizar os campos completos:
 
-* modal_rodoviario [para transporte rodoviário.](https://focusnfe.com.br/dsl/mdfe3.0/TransporteRodoviarioXML.html)
-* modal_aereo [para transporte aéreo.] (https://focusnfe.com.br/dsl/mdfe3.0/TransporteAereoXML.html)
-* modal_aquaviario [para transporte aquaviário.] (https://focusnfe.com.br/dsl/mdfe3.0/TransporteAquaviarioXML.html)
-* modal_ferroviario [para transporte ferroviário.] (https://focusnfe.com.br/dsl/mdfe3.0/TransporteFerroviarioXML.html)
+* modal_rodoviario [para transporte rodoviário.](https://campos.focusnfe.com.br/mdfe/TransporteRodoviarioXML.html)
+* modal_aereo [para transporte aéreo.] (https://campos.focusnfe.com.br/mdfe/TransporteAereoXML.html)
+* modal_aquaviario [para transporte aquaviário.] (https://campos.focusnfe.com.br/mdfe/TransporteAquaviarioXML.html)
+* modal_ferroviario [para transporte ferroviário.] (https://campos.focusnfe.com.br/mdfe/TransporteFerroviarioXML.html)
 
 
 ## Status API

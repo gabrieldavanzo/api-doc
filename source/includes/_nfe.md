@@ -28,7 +28,7 @@ POST |	/v2/nfe/importacao?ref=REFERENCIA	| Cria uma nota fiscal a partir da impo
 
 Atualmente, a NFe possui centenas de campos para os mais variados tipos e formas de operações, por isso, criamos uma página exclusiva que mostra todos os campos da nossa API para o envio de NFe. Nela, você pode buscar os campos pela TAG XML ou pela nossa tradução para API.
 
-[Documentação completa dos campos (versão 4.00 da NFe)](https://focusnfe.com.br/dsl/4.0/NotaFiscalXML.html)
+[Documentação completa dos campos (versão 4.00 da NFe)](https://campos.focusnfe.com.br/nfe/NotaFiscalXML.html)
 
 Abaixo, iremos mostrar os campos de uso obrigatório para emissão de uma Nota Fiscal Eletrônica.
 
