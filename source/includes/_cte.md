@@ -140,12 +140,12 @@ A CTe possui vários campos para os mais variados tipos e formas de operações,
 
 [Documentação completa dos campos CTe](https://campos.focusnfe.com.br/cte_cteos/ConhecimentoTransporteXML.html)
 
-[Documentação completa dos campos CTe OS](https://campos.focusnfe.com.br/cte_cteos/TransporteRodoviarioOsXML.html)
+[Documentação completa dos campos CTe OS](https://campos.focusnfe.com.br/cte_cteos/ConhecimentoTransporteOsXML.html)
 
 Além dos campos descritos acima, cada CTe deverá obrigatoriamente informar um **modal**, que é a forma de transporte da carga. Você deverá informar uma das seguintes chaves nos dados, clique em cada link para visualizar os campos completos:
 
-* modal_rodoviario para transporte rodoviário. [Consulte campos para CTe](https://campos.focusnfe.com.br/cte_cteos/ConhecimentoTransporteXML.html) e [Consulte campos para CTe OS](https://campos.focusnfe.com.br/cte_cteos/TransporteRodoviarioOsXML.html)
-* modal_aereo [para transporte aéreo.] (https://campos.focusnfe.com.br/cte_cteos/TransporteRodoviarioOsXML.html)
+* modal_rodoviario para transporte rodoviário. [Consulte campos para CTe](https://campos.focusnfe.com.br/cte_cteos/TransporteRodoviarioXML.html) e [Consulte campos para CTe OS](https://campos.focusnfe.com.br/cte_cteos/TransporteRodoviarioOsXML.html)
+* modal_aereo [para transporte aéreo.] (https://campos.focusnfe.com.br/cte_cteos/TransporteAereoXML.html)
 * modal_aquaviario [para transporte aquaviário.] (https://campos.focusnfe.com.br/cte_cteos/TransporteAquaviarioXML.html)
 * modal_ferroviario [para transporte ferroviário.] (https://campos.focusnfe.com.br/cte_cteos/TransporteFerroviarioXML.html)
 * modal_dutoviario [para transporte dutoviário.] (https://campos.focusnfe.com.br/cte_cteos/TransporteDutoviarioXML.html)
